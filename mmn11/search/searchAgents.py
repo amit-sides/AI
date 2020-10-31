@@ -354,7 +354,7 @@ def cornersHeuristic(state, problem):
   total_cost = 0
 
   def find_closest_corner(position, corners):
-    corner_min_distance = 999999
+    corner_min_distance = float("Inf")
     closest_corner = None
     for corner in corners:
       distance = util.manhattanDistance(position, corner)
@@ -461,8 +461,33 @@ def foodHeuristic(state, problem):
   Subsequent calls to this heuristic can access problem.heuristicInfo['wallCount']
   """
   position, foodGrid = state
-  "*** YOUR CODE HERE ***"
-  return 0
+
+  def find_closest_food(position, foods):
+    food_min_distance = float('Inf')
+    closest_food = None
+    for food in foods:
+      distance = util.manhattanDistance(position, food)
+      if distance < food_min_distance:
+        food_min_distance = distance
+        closest_food = food
+    return closest_food, food_min_distance
+
+  min_total = float('Inf')
+  all_food = foodGrid.asList()
+  if len(all_food) == 0:
+    return 0
+
+  for current_food in all_food:
+    food_left = all_food[:]
+    food_left.remove(current_food)
+    total_cost = util.manhattanDistance(position, current_food)
+    while len(food_left) > 0:
+      current_food, distance = find_closest_food(current_food, food_left)
+      food_left.remove(current_food)
+      total_cost += distance
+    min_total = min(total_cost, min_total)
+
+  return min_total
   
 class ClosestDotSearchAgent(SearchAgent):
   "Search for all food using a sequence of searches"
@@ -489,8 +514,7 @@ class ClosestDotSearchAgent(SearchAgent):
     walls = gameState.getWalls()
     problem = AnyFoodSearchProblem(gameState)
 
-    "*** YOUR CODE HERE ***"
-    util.raiseNotDefined()
+    return search.breadthFirstSearch(problem)
   
 class AnyFoodSearchProblem(PositionSearchProblem):
   """
@@ -523,10 +547,8 @@ class AnyFoodSearchProblem(PositionSearchProblem):
     The state is Pacman's position. Fill this in with a goal test
     that will complete the problem definition.
     """
-    x,y = state
-    
-    "*** YOUR CODE HERE ***"
-    util.raiseNotDefined()
+    x, y = state
+    return self.food[x][y]
 
 ##################
 # Mini-contest 1 #
