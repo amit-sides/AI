@@ -460,7 +460,7 @@ def foodHeuristic(state, problem):
     problem.heuristicInfo['wallCount'] = problem.walls.count()
   Subsequent calls to this heuristic can access problem.heuristicInfo['wallCount']
   """
-  position, foodGrid = state
+  current_position, foodGrid = state
 
   def find_closest_food(position, foods):
     food_min_distance = float('Inf')
@@ -480,12 +480,13 @@ def foodHeuristic(state, problem):
   for current_food in all_food:
     food_left = all_food[:]
     food_left.remove(current_food)
-    total_cost = util.manhattanDistance(position, current_food)
+    total_cost = util.manhattanDistance(current_position, current_food)
     while len(food_left) > 0:
       current_food, distance = find_closest_food(current_food, food_left)
       food_left.remove(current_food)
       total_cost += distance
     min_total = min(total_cost, min_total)
+  print "min:", min_total
 
   return min_total
   
