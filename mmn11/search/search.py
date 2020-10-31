@@ -67,6 +67,37 @@ def tinyMazeSearch(problem):
   w = Directions.WEST
   return  [s,s,w,s,w,w,s,w]
 
+def genericSearch(problem, frontier):
+    """
+    Implements a generic tree search using a given frontier.
+    When frontier is Stack: It performs DFS.
+    When frontier is Queue: It performs BFS.
+    When frontier is PriorityQueue: It performs the search according to the cost function.
+    """
+    calculated_states = []
+    current_state = problem.getStartState()
+    frontier.push((current_state, [], 0))
+
+    while not frontier.isEmpty():
+        current_state, moves, cost = frontier.pop()
+
+        if current_state in calculated_states:
+            continue
+        calculated_states.append(current_state)
+
+        if problem.isGoalState(current_state):
+            return moves
+
+        for successor, move, successor_cost in problem.getSuccessors(current_state):
+            successor_moves = moves[:]
+            successor_moves.append(move)
+            if successor in calculated_states:
+                continue
+            frontier.push((successor, successor_moves, cost + successor_cost))
+
+    return []
+
+
 def depthFirstSearch(problem):
   """
   Search the deepest nodes in the search tree first [p 74].
@@ -81,18 +112,20 @@ def depthFirstSearch(problem):
   print "Is the start a goal?", problem.isGoalState(problem.getStartState())
   print "Start's successors:", problem.getSuccessors(problem.getStartState())
   """
-  "*** YOUR CODE HERE ***"
-  util.raiseNotDefined()
+  frontier = util.Stack()
+  return genericSearch(problem, frontier)
+
 
 def breadthFirstSearch(problem):
   "Search the shallowest nodes in the search tree first. [p 74]"
-  "*** YOUR CODE HERE ***"
-  util.raiseNotDefined()
+  frontier = util.Queue()
+  return genericSearch(problem, frontier)
       
 def uniformCostSearch(problem):
   "Search the node of least total cost first. "
-  "*** YOUR CODE HERE ***"
-  util.raiseNotDefined()
+  myCostFunction = lambda state: state[2]
+  frontier = util.PriorityQueueWithFunction(myCostFunction)
+  return genericSearch(problem, frontier)
 
 def nullHeuristic(state, problem=None):
   """
@@ -103,8 +136,9 @@ def nullHeuristic(state, problem=None):
 
 def aStarSearch(problem, heuristic=nullHeuristic):
   "Search the node that has the lowest combined cost and heuristic first."
-  "*** YOUR CODE HERE ***"
-  util.raiseNotDefined()
+  myHeuristicFunction = lambda state: heuristic(state[0], problem) + state[2]
+  frontier = util.PriorityQueueWithFunction(myHeuristicFunction)
+  return genericSearch(problem, frontier)
     
   
 # Abbreviations
