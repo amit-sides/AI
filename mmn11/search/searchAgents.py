@@ -472,23 +472,13 @@ def foodHeuristic(state, problem):
         closest_food = food
     return closest_food, food_min_distance
 
-  min_total = float('Inf')
   all_food = foodGrid.asList()
   if len(all_food) == 0:
     return 0
 
-  for current_food in all_food:
-    food_left = all_food[:]
-    food_left.remove(current_food)
-    total_cost = util.manhattanDistance(current_position, current_food)
-    while len(food_left) > 0:
-      current_food, distance = find_closest_food(current_food, food_left)
-      food_left.remove(current_food)
-      total_cost += distance
-    min_total = min(total_cost, min_total)
-  print "min:", min_total
+  food, distance = find_closest_food(current_position, all_food)
 
-  return min_total
+  return distance + len(all_food) - 1
   
 class ClosestDotSearchAgent(SearchAgent):
   "Search for all food using a sequence of searches"
