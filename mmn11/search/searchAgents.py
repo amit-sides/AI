@@ -498,15 +498,31 @@ def foodHeuristic(state, problem):
       food2_distance = util.manhattanDistance(current_position, food_list[1])
       return min(food1_distance, food2_distance) + food_distance
 
-  # If 3 or more food exist, check which 3 produce the longest (optimal) manhattan distance between all 3
-  # To reach more than 3, you would have to do a path longer than this calculation.
-  # So, in-order to get all the food, you will most definitely have to do more steps than this (unless food count is 3 and walls don't interfere)
-  max_distance_of_three = 0
-  for combination in itertools.combinations(food_list, 3):
-      total_distance = smallest_distance_of_3_foods(current_position, combination, problem)
-      max_distance_of_three = max(max_distance_of_three, total_distance)
+  if len(food_list) == 3:
+      return smallest_distance_of_3_foods(current_position, food_list, problem)
 
-  return max_distance_of_three
+  min_x_point = (float("Inf"), 0)
+  min_y_point = (0, float("Inf"))
+  max_x_point = (0, 0)
+  max_y_point = (0, 0)
+  for food_x, food_y in food_list:
+    if food_x > max_x_point[0]:
+        max_x_point = food_x, food_y
+    if food_y > max_y_point[1]:
+        max_y_point = food_x, food_y
+    if food_x < min_x_point[0]:
+        min_x_point = food_x, food_y
+    if food_y < min_y_point[1]:
+        min_y_point = food_x, food_y
+
+  edge_points = [min_x_point, max_y_point, max_x_point, min_y_point]
+  min_total_distance = 0
+  for i in range(len(edge_points)):
+      total_distance = util.manhattanDistance(current_position, edge_points[i])
+      total_distance += smallest_distance_of_3_foods(edge_points[i], (edge_points[i-1], edge_points[i-2], edge_points[i-3]), problem)
+      min_total_distance = min(total_distance, min_total_distance)
+
+  return min_total_distance
   
 class ClosestDotSearchAgent(SearchAgent):
   "Search for all food using a sequence of searches"
