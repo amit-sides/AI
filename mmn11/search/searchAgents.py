@@ -435,6 +435,26 @@ class AStarFoodSearchAgent(SearchAgent):
     self.searchFunction = lambda prob: search.aStarSearch(prob, foodHeuristic)
     self.searchType = FoodSearchProblem
 
+def smallest_distance_of_3_foods(current_position, foods, problem=None):
+  # Check cache for a solution for this problem
+  if problem and ((current_position,) + tuple(foods)) in problem.heuristicInfo:
+    return problem.heuristicInfo[(current_position,) + tuple(foods)]
+
+  # Calculates the optimal (theoretical) distance to reach all 3 foods
+  min_distance_of_current_combination = float("Inf")
+  for i in range(len(foods)):
+    d1 = util.manhattanDistance(current_position, foods[i])
+    d2 = min(util.manhattanDistance(foods[i], foods[i - 1]), util.manhattanDistance(foods[i], foods[i - 2]))
+    d3 = util.manhattanDistance(foods[i - 1], foods[i - 2])
+    if d1 + d2 + d3 < min_distance_of_current_combination:
+      min_distance_of_current_combination = d1 + d2 + d3
+
+  # Enter solution to cache
+  if problem:
+    problem.heuristicInfo[(current_position,) + tuple(foods)] = min_distance_of_current_combination
+
+  return min_distance_of_current_combination
+
 def foodHeuristic(state, problem):
   """
   Your heuristic for the FoodSearchProblem goes here.
@@ -460,27 +480,43 @@ def foodHeuristic(state, problem):
     problem.heuristicInfo['wallCount'] = problem.walls.count()
   Subsequent calls to this heuristic can access problem.heuristicInfo['wallCount']
   """
-  current_pos, food_grid = state
+  import itertools
+  current_position, food_grid = state
   food_list = food_grid.asList()
-  food_pairs = []
 
   # if no food exists, we are at goal state
   if len(food_list) == 0:
     return 0
   # if 1 food exists, return the manhattan distance (optimal theoretically shortest path)
   if len(food_list) == 1:
-    return util.manhattanDistance(current_pos, food_list[0])
+    return util.manhattanDistance(current_position, food_list[0])
 
-  for i, food in enumerate(food_list):
-    food_pairs += [(food, other_food, util.manhattanDistance(food, other_food)) for other_food in food_list[i:]]
+  # if 2 food exist, check which one we should go first, and calculate manhattan path
+  if len(food_list) == 2:
+    food_distance = util.manhattanDistance(food_list[0], food_list[1])
+    food1_distance = util.manhattanDistance(current_position, food_list[0])
+    food2_distance = util.manhattanDistance(current_position, food_list[1])
+    return min(food1_distance, food2_distance) + food_distance
 
-  # Find a food pair with the longest distance
-  furthest_pair = sorted(food_pairs, key=lambda pair: pair[2], reverse=True)[0]
+  if len(food_list) == 3:
+    return smallest_distance_of_3_foods(current_position, food_list, problem)
 
-  # Compute total (shortest) distance between origin and the 2 foods which are furthest away from each other
-  total_dist = min(util.manhattanDistance(current_pos, furthest_pair[0]), util.manhattanDistance(current_pos, furthest_pair[1])) + furthest_pair[2]
+  # If 4 or more food exist, check which 4 produce the longest (optimal) manhattan distance between all 4
+  # To reach more than 4, you would have to do a path longer than this calculation.
+  # So, in-order to get all the food, you will most definitely have to do more steps than this (unless food count is 4 and walls don't interfere)
+  max_distance_of_four = 0
+  for combination in itertools.combinations(food_list, 4):
+    min_distance_of_current_combination = float("Inf")
+    for i in range(len(combination)):
+      total_distance = util.manhattanDistance(current_position, combination[i])
+      food_three = (combination[i-1], combination[i-2], combination[i-3])
+      total_distance += smallest_distance_of_3_foods(combination[i], food_three, problem)
+      if total_distance < min_distance_of_current_combination:
+        min_distance_of_current_combination = total_distance
+    if min_distance_of_current_combination > max_distance_of_four:
+      max_distance_of_four = min_distance_of_current_combination
 
-  return total_dist
+  return max_distance_of_four
   
 class ClosestDotSearchAgent(SearchAgent):
   "Search for all food using a sequence of searches"
