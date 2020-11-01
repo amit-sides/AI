@@ -480,26 +480,33 @@ def foodHeuristic(state, problem):
     problem.heuristicInfo['wallCount'] = problem.walls.count()
   Subsequent calls to this heuristic can access problem.heuristicInfo['wallCount']
   """
+  import itertools
   current_position, food_grid = state
-  food_list = food_grid.asList()
+  food_list = sorted(food_grid.asList())
 
   # if no food exists, we are at goal state
   if len(food_list) == 0:
-    return 0
+      return 0
+  # if 1 food exists, return the manhattan distance (optimal theoretically shortest path)
+  if len(food_list) == 1:
+      return util.manhattanDistance(current_position, food_list[0])
 
-  max_x = max_y = float("Inf")
-  min_x = min_y = 0
+  # if 2 food exist, check which one we should (probably) go first, and calculate manhattan path
+  if len(food_list) == 2:
+      food_distance = util.manhattanDistance(food_list[0], food_list[1])
+      food1_distance = util.manhattanDistance(current_position, food_list[0])
+      food2_distance = util.manhattanDistance(current_position, food_list[1])
+      return min(food1_distance, food2_distance) + food_distance
 
-  for food in food_list:
-    max_x = max(max_x, food[0])
-    min_x = min(min_x, food[0])
-    max_y = max(max_y, food[1])
-    min_y = min(min_y, food[1])
+  # If 3 or more food exist, check which 3 produce the longest (optimal) manhattan distance between all 3
+  # To reach more than 3, you would have to do a path longer than this calculation.
+  # So, in-order to get all the food, you will most definitely have to do more steps than this (unless food count is 3 and walls don't interfere)
+  max_distance_of_three = 0
+  for combination in itertools.combinations(food_list, 3):
+      total_distance = smallest_distance_of_3_foods(current_position, combination, problem)
+      max_distance_of_three = max(max_distance_of_three, total_distance)
 
-  d2 = min(util.manhattanDistance(current_position, (min_x, min_y)), util.manhattanDistance(current_position, (max_x, max_y)))
-  d3 = util.manhattanDistance((min_x, min_y), (max_x, max_y))
-
-  return d2 + d3
+  return max_distance_of_three
   
 class ClosestDotSearchAgent(SearchAgent):
   "Search for all food using a sequence of searches"
