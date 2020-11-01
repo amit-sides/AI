@@ -460,25 +460,27 @@ def foodHeuristic(state, problem):
     problem.heuristicInfo['wallCount'] = problem.walls.count()
   Subsequent calls to this heuristic can access problem.heuristicInfo['wallCount']
   """
-  current_position, foodGrid = state
+  current_pos, foodGrid = state;
+  foodList = foodGrid.asList()
+  list_of_tuples = []
 
-  def find_closest_food(position, foods):
-    food_min_distance = float('Inf')
-    closest_food = None
-    for food in foods:
-      distance = util.manhattanDistance(position, food)
-      if distance < food_min_distance:
-        food_min_distance = distance
-        closest_food = food
-    return closest_food, food_min_distance
+  # If there is no food, return 0 - we are at the "Goal State".
+  if len(foodList) == 0: return 0
+  # If there exists only 1 food, return the manhattan distance between origin and food
+  if len(foodList) == 1: return util.manhattanDistance(current_pos, foodList[0])
 
-  all_food = foodGrid.asList()
-  if len(all_food) == 0:
-    return 0
+  for idx1, food1 in enumerate(foodList):
+    list_of_tuples += [(food1, food2, util.manhattanDistance(food1, food2)) for food2 in foodList[idx1:]]
 
-  food, distance = find_closest_food(current_position, all_food)
+  # Find the largest distance between 2 foods
+  furthest_foods = sorted(list_of_tuples, key=lambda tup: tup[2], reverse=True)[0]
 
-  return distance + len(all_food) - 1
+  # Compute total (shortest) distance between origin and the 2 foods which are furthest away from each other
+  total_dist = (min(
+    [util.manhattanDistance(current_pos, furthest_foods[0]), util.manhattanDistance(current_pos, furthest_foods[1])])
+                + furthest_foods[2])
+
+  return total_dist
   
 class ClosestDotSearchAgent(SearchAgent):
   "Search for all food using a sequence of searches"
