@@ -460,32 +460,27 @@ def foodHeuristic(state, problem):
     problem.heuristicInfo['wallCount'] = problem.walls.count()
   Subsequent calls to this heuristic can access problem.heuristicInfo['wallCount']
   """
-  position, foodGrid = state
-  "*** YOUR CODE HERE ***"
-  remainingFood = foodGrid.asList()
+  current_pos, food_grid = state
+  food_list = food_grid.asList()
+  food_pairs = []
 
-  # if no food present it should return non negative
-  # since we need to find the distance from current position to the food positions
-  # first check if there is any food i.e. if the length of the food list is 0
-  if len(remainingFood) == 0:
+  # if no food exists, we are at goal state
+  if len(food_list) == 0:
     return 0
+  # if 1 food exists, return the manhattan distance (optimal theoretically shortest path)
+  if len(food_list) == 1:
+    return util.manhattanDistance(current_pos, food_list[0])
 
-  # now find the distance from position to the food pellet and find the
-  # farthest corner from the present state and calculate
-  # 1. manhattan distance
-  # 2. euclidean - didnt work
-  # 3. better?
+  for i, food in enumerate(food_list):
+    food_pairs += [(food, other_food, util.manhattanDistance(food, other_food)) for other_food in food_list[i:]]
 
-  distanceList = []
+  # Find a food pair with the longest distance
+  furthest_pair = sorted(food_pairs, key=lambda pair: pair[2], reverse=True)[0]
 
-  for food in remainingFood:
-    # append to the distance list the manhattan distance
-    distanceList.append(util.manhattanDistance(position, food))
+  # Compute total (shortest) distance between origin and the 2 foods which are furthest away from each other
+  total_dist = min(util.manhattanDistance(current_pos, furthest_pair[0]), util.manhattanDistance(current_pos, furthest_pair[1])) + furthest_pair[2]
 
-  # find the maximum distance food pellet and return it
-  mDistance = max(distanceList)
-
-  return mDistance  # Default to trivial solution
+  return total_dist
   
 class ClosestDotSearchAgent(SearchAgent):
   "Search for all food using a sequence of searches"
