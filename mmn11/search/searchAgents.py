@@ -493,10 +493,7 @@ def foodHeuristic(state, problem):
 
   # if 2 food exist, check which one we should (probably) go first, and calculate manhattan path
   if len(food_list) == 2:
-      food_distance = util.manhattanDistance(food_list[0], food_list[1])
-      food1_distance = util.manhattanDistance(current_position, food_list[0])
-      food2_distance = util.manhattanDistance(current_position, food_list[1])
-      return min(food1_distance, food2_distance) + food_distance
+      return smallest_distance_of_3_foods(current_position, [current_position] + food_list)
 
   # If 3 or more food exist, check which 3 produce the longest (optimal) manhattan distance between all 3
   # To reach more than 3, you would have to do a path longer than this calculation.
