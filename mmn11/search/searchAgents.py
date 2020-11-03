@@ -458,7 +458,7 @@ class AStarFoodSearchAgent(SearchAgent):
 def hardest_points_to_reach(current_position, points, amount, problem=None):
   import itertools
 
-  amount = min(amount, 4) # Supports 4 or less points
+  amount = min(amount, 4)  # Supports 4 or less points
 
   max_distance_of_combination = 0
   # Iterate through all combinations of 'amount' points (where amount is 0 <= amount <= 4)
