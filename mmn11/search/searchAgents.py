@@ -333,6 +333,45 @@ class CornersProblem(search.SearchProblem):
       if self.walls[x][y]: return 999999
     return len(actions)
 
+def smallest_distance_of_3_points(current_position, points, problem=None):
+  if len(points) == 0:
+    return 0
+  if len(points) == 1:
+    return util.manhattanDistance(current_position, points[0])
+  if len(points) == 2:
+    return smallest_distance_of_3_points(current_position, [current_position] + points)
+
+  # Check cache for a solution for this problem
+  if problem and ((current_position,) + tuple(points)) in problem.heuristicInfo:
+    return problem.heuristicInfo[(current_position,) + tuple(points)]
+
+  # Calculates the optimal (theoretical) distance to reach all 3 foods
+  min_distance_of_current_combination = float("Inf")
+  for i in range(len(points)):
+    d1 = util.manhattanDistance(current_position, points[i])
+    d2 = min(util.manhattanDistance(points[i], points[i - 1]), util.manhattanDistance(points[i], points[i - 2]))
+    d3 = util.manhattanDistance(points[i - 1], points[i - 2])
+    if d1 + d2 + d3 < min_distance_of_current_combination:
+      min_distance_of_current_combination = d1 + d2 + d3
+
+  # Insert solution to cache
+  if problem:
+    problem.heuristicInfo[(current_position,) + tuple(points)] = min_distance_of_current_combination
+
+  return min_distance_of_current_combination
+
+def smallest_distance_of_4_points(current_position, points, problem=None):
+  if len(points) <= 3:
+    return smallest_distance_of_3_points(current_position, points)
+
+  min_distance = float("Inf")
+  for i in range(len(points)):
+    points_left = [points[i - 1], points[i - 2], points[i - 3]]
+    distance = util.manhattanDistance(current_position, points[i])
+    distance += smallest_distance_of_3_points(points[i], points_left, problem)
+    min_distance = min(min_distance, distance)
+  return min_distance
+
 
 def cornersHeuristic(state, problem):
   """
@@ -348,30 +387,11 @@ def cornersHeuristic(state, problem):
   it should be admissible.  (You need not worry about consistency for
   this heuristic to receive full credit.)
   """
-  corners = problem.corners # These are the corner coordinates
-  walls = problem.walls # These are the walls of the maze, as a Grid (game.py)
-
-  total_cost = 0
-
-  def find_closest_corner(position, corners):
-    corner_min_distance = float("Inf")
-    closest_corner = None
-    for corner in corners:
-      distance = util.manhattanDistance(position, corner)
-      if distance < corner_min_distance:
-        corner_min_distance = distance
-        closest_corner = corner
-    return closest_corner, corner_min_distance
-
-  corners_left = state[1][:]
   current_position = state[0]
-  while len(corners_left) > 0:
-    closest_corner, distance = find_closest_corner(current_position, corners_left)
-    corners_left.remove(closest_corner)
-    total_cost += distance
-    current_position = closest_corner
+  corners_left = state[1][:]
 
-  return total_cost
+  return smallest_distance_of_4_points(current_position, corners_left)
+
 
 class AStarCornersAgent(SearchAgent):
   "A SearchAgent for FoodSearchProblem using A* and your foodHeuristic"
@@ -435,25 +455,22 @@ class AStarFoodSearchAgent(SearchAgent):
     self.searchFunction = lambda prob: search.aStarSearch(prob, foodHeuristic)
     self.searchType = FoodSearchProblem
 
-def smallest_distance_of_3_foods(current_position, foods, problem=None):
-  # Check cache for a solution for this problem
-  if problem and ((current_position,) + tuple(foods)) in problem.heuristicInfo:
-    return problem.heuristicInfo[(current_position,) + tuple(foods)]
+def hardest_points_to_reach(current_position, points, amount, problem=None):
+  import itertools
 
-  # Calculates the optimal (theoretical) distance to reach all 3 foods
-  min_distance_of_current_combination = float("Inf")
-  for i in range(len(foods)):
-    d1 = util.manhattanDistance(current_position, foods[i])
-    d2 = min(util.manhattanDistance(foods[i], foods[i - 1]), util.manhattanDistance(foods[i], foods[i - 2]))
-    d3 = util.manhattanDistance(foods[i - 1], foods[i - 2])
-    if d1 + d2 + d3 < min_distance_of_current_combination:
-      min_distance_of_current_combination = d1 + d2 + d3
+  amount = min(amount, 4) # Supports 4 or less points
 
-  # Enter solution to cache
-  if problem:
-    problem.heuristicInfo[(current_position,) + tuple(foods)] = min_distance_of_current_combination
+  max_distance_of_combination = 0
+  # Iterate through all combinations of 'amount' points (where amount is 0 <= amount <= 4)
+  for combination in itertools.combinations(points, amount):
+    # Calculate the best (optimistic) distance to reach all of them
+    total_distance = smallest_distance_of_4_points(current_position, combination, problem)
 
-  return min_distance_of_current_combination
+    # Keep the combination whose best distance is the largest (aka the hardest combination to reach)
+    max_distance_of_combination = max(max_distance_of_combination, total_distance)
+
+  # Return the (optimistic) distance of the hardest combination
+  return max_distance_of_combination
 
 def foodHeuristic(state, problem):
   """
@@ -480,49 +497,21 @@ def foodHeuristic(state, problem):
     problem.heuristicInfo['wallCount'] = problem.walls.count()
   Subsequent calls to this heuristic can access problem.heuristicInfo['wallCount']
   """
-  import itertools
   current_position, food_grid = state
   food_list = sorted(food_grid.asList())
 
-  # if no food exists, we are at goal state
-  if len(food_list) == 0:
-      return 0
-  # if 1 food exists, return the manhattan distance (optimal theoretically shortest path)
-  if len(food_list) == 1:
-      return util.manhattanDistance(current_position, food_list[0])
+  # if 4 food exist (or less), calculate the smallest manhattan distance to all of them
+  if len(food_list) <= 4:
+      return smallest_distance_of_4_points(current_position, food_list, problem)
 
-  # if 2 food exist, check which one we should (probably) go first, and calculate manhattan path
-  if len(food_list) == 2:
-      food_distance = util.manhattanDistance(food_list[0], food_list[1])
-      food1_distance = util.manhattanDistance(current_position, food_list[0])
-      food2_distance = util.manhattanDistance(current_position, food_list[1])
-      return min(food1_distance, food2_distance) + food_distance
+  # I discovered that after some point, it's faster to check larger combinations
+  # So, when our food list gets smaller than 9, we check combination of 4 instead of 3
+  amount = 3 if len(food_list) > 9 else 4
 
-  if len(food_list) == 3:
-      return smallest_distance_of_3_foods(current_position, food_list, problem)
-
-  min_x_point = (float("Inf"), 0)
-  min_y_point = (0, float("Inf"))
-  max_x_point = (0, 0)
-  max_y_point = (0, 0)
-  for food_x, food_y in food_list:
-    if food_x > max_x_point[0]:
-        max_x_point = food_x, food_y
-    if food_y > max_y_point[1]:
-        max_y_point = food_x, food_y
-    if food_x < min_x_point[0]:
-        min_x_point = food_x, food_y
-    if food_y < min_y_point[1]:
-        min_y_point = food_x, food_y
-
-  edge_points = [min_x_point, max_y_point, max_x_point, min_y_point]
-  min_total_distance = 0
-  for i in range(len(edge_points)):
-      total_distance = util.manhattanDistance(current_position, edge_points[i])
-      total_distance += smallest_distance_of_3_foods(edge_points[i], (edge_points[i-1], edge_points[i-2], edge_points[i-3]), problem)
-      min_total_distance = min(total_distance, min_total_distance)
-
-  return min_total_distance
+  # If 5 or more food exist, check which combination of length 'amount' produces the longest (optimal) manhattan distance between all points in combination.
+  # To reach more than 'amount' points, you would have to do a path which is (probably) longer than this calculated path.
+  # So, in-order to get all the food, you will most definitely have to do more steps than this (unless the food happens to be on this path and walls don't interfere)
+  return hardest_points_to_reach(current_position, food_list, amount, problem)
   
 class ClosestDotSearchAgent(SearchAgent):
   "Search for all food using a sequence of searches"
