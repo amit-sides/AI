@@ -9,8 +9,51 @@
 from util import manhattanDistance
 from game import Directions
 import random, util
+import math
 
 from game import Agent
+
+
+def convertActionToPosition(current_position, action):
+    # action should be a legal action
+    if action == "Stop":
+        return current_position
+    if action == "West":
+        return current_position[0] - 1, current_position[1]
+    if action == "East":
+        return current_position[0] + 1, current_position[1]
+    if action == "North":
+        return current_position[0], current_position[1] + 1
+    if action == "South":
+        return current_position[0], current_position[1] - 1
+
+    # Invalid action!
+    return -1, -1
+
+
+def mazeDistanceToClosestPoint(state, pointsList):
+    calculated_positions = []
+    frontier = util.Queue()
+
+    frontier.push((state, 0))
+    while not frontier.isEmpty():
+        current_state, distance = frontier.pop()
+
+        if current_state.getPacmanPosition() in calculated_positions:
+            continue
+        calculated_positions.append(current_state.getPacmanPosition())
+
+        for p in pointsList:
+            if util.manhattanDistance(current_state.getPacmanPosition(), p) < 1:
+                return distance
+
+        for action in current_state.getLegalActions():
+            successor = current_state.generatePacmanSuccessor(action)
+            if successor.getPacmanPosition() in calculated_positions:
+                continue
+            frontier.push((successor, distance + 1))
+
+    return float("Inf")
 
 class ReflexAgent(Agent):
   """
@@ -42,7 +85,7 @@ class ReflexAgent(Agent):
     chosenIndex = random.choice(bestIndices) # Pick randomly among the best
 
     "Add more of your code here if you want to"
-
+    #print "Moving:", legalMoves[chosenIndex]
     return legalMoves[chosenIndex]
 
   def evaluationFunction(self, currentGameState, action):
@@ -63,12 +106,49 @@ class ReflexAgent(Agent):
     # Useful information you can extract from a GameState (pacman.py)
     successorGameState = currentGameState.generatePacmanSuccessor(action)
     newPos = successorGameState.getPacmanPosition()
-    oldFood = currentGameState.getFood()
+    oldFood = currentGameState.getFood().asList()
+    newFood = currentGameState.getFood().asList()
     newGhostStates = successorGameState.getGhostStates()
-    newScaredTimes = [ghostState.scaredTimer for ghostState in newGhostStates]
+    boardWidth = currentGameState.data.layout.width
+    boardHeight = currentGameState.data.layout.height
 
-    "*** YOUR CODE HERE ***"
-    return successorGameState.getScore()
+    oldFoodCount = currentGameState.getNumFood()
+    newFoodCount = successorGameState.getNumFood()
+
+    total_value = 0
+
+    ghostsEaten = 0
+    for currentGhost, successorGhost in zip(currentGameState.getGhostStates(), newGhostStates):
+        if util.manhattanDistance(currentGhost.getPosition(), successorGhost.getPosition()) > 1:
+            ghostsEaten += 1
+
+
+    normalGhosts = [util.nearestPoint(ghost.getPosition()) for ghost in newGhostStates if ghost.scaredTimer == 0]
+    if len(normalGhosts) > 0:
+        distanceFromClosestGhost = mazeDistanceToClosestPoint(successorGameState, normalGhosts)
+        safe_distance = 3
+
+        if ghostsEaten > 0 and distanceFromClosestGhost > safe_distance:
+            return (boardWidth + boardHeight) * 100  # Eat the ghost!
+
+        if distanceFromClosestGhost <= safe_distance:
+            return -5 * (safe_distance - distanceFromClosestGhost)
+    elif ghostsEaten > 0:
+        return (boardWidth + boardHeight) * 100  # Eat the ghost!
+
+    scaredGhosts = [convertActionToPosition(ghost.getPosition(), ghost.getDirection()) for ghost in newGhostStates if ghost.scaredTimer > 0]
+    if len(scaredGhosts) > 0:
+        distanceFromClosestGhost = mazeDistanceToClosestPoint(successorGameState, scaredGhosts)
+        total_value += (boardWidth + boardHeight - distanceFromClosestGhost) * 5 # multiply by 5 to prefer eating a ghost
+
+    if oldFoodCount > newFoodCount:
+        distanceFromClosestFood = 0
+    elif newFoodCount > 0:
+        distanceFromClosestFood = mazeDistanceToClosestPoint(successorGameState, newFood)
+
+    total_value += (boardWidth + boardHeight - distanceFromClosestFood)
+
+    return total_value
 
 def scoreEvaluationFunction(currentGameState):
   """
