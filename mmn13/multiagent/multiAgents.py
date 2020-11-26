@@ -55,6 +55,16 @@ def mazeDistanceToClosestPoint(state, pointsList):
 
     return float("Inf")
 
+def manhattanDistanceToClosestPoint(state, pointsList):
+    minimumDistance = float("Inf")
+
+    for point in pointsList:
+        distance = util.manhattanDistance(state.getPacmanPosition(), point)
+        minimumDistance = min(distance, minimumDistance)
+
+    return minimumDistance
+
+
 class ReflexAgent(Agent):
   """
     A reflex agent chooses an action at each choice point by examining
@@ -85,7 +95,6 @@ class ReflexAgent(Agent):
     chosenIndex = random.choice(bestIndices) # Pick randomly among the best
 
     "Add more of your code here if you want to"
-    #print "Moving:", legalMoves[chosenIndex]
     return legalMoves[chosenIndex]
 
   def evaluationFunction(self, currentGameState, action):
@@ -105,8 +114,6 @@ class ReflexAgent(Agent):
     """
     # Useful information you can extract from a GameState (pacman.py)
     successorGameState = currentGameState.generatePacmanSuccessor(action)
-    newPos = successorGameState.getPacmanPosition()
-    oldFood = currentGameState.getFood().asList()
     newFood = currentGameState.getFood().asList()
     newGhostStates = successorGameState.getGhostStates()
     boardWidth = currentGameState.data.layout.width
@@ -115,40 +122,51 @@ class ReflexAgent(Agent):
     oldFoodCount = currentGameState.getNumFood()
     newFoodCount = successorGameState.getNumFood()
 
-    total_value = 0
+    totalValue = 0
 
+    # Since openClassic doesn't have any walls, we better use manhattan distance instead of maze distance
+    # In mazes where there are walls, you mazeDistanceToClosestPoint as distanceFunction
+    distanceFunction = manhattanDistanceToClosestPoint
+
+    # Checks if any of the ghosts was eaten in the successor state (indicated by drastic change in location)
     ghostsEaten = 0
     for currentGhost, successorGhost in zip(currentGameState.getGhostStates(), newGhostStates):
         if util.manhattanDistance(currentGhost.getPosition(), successorGhost.getPosition()) > 1:
             ghostsEaten += 1
 
-
+    # Implements a mechanism for escaping ghosts (keeps a distance of `safeDistance` away from closest ghost)
+    safeDistance = 3
     normalGhosts = [util.nearestPoint(ghost.getPosition()) for ghost in newGhostStates if ghost.scaredTimer == 0]
-    if len(normalGhosts) > 0:
-        distanceFromClosestGhost = mazeDistanceToClosestPoint(successorGameState, normalGhosts)
-        safe_distance = 3
+    if len(normalGhosts) > 0:  # If there are normal ghosts
+        distanceFromClosestGhost = distanceFunction(successorGameState, normalGhosts)
 
-        if ghostsEaten > 0 and distanceFromClosestGhost > safe_distance:
+        # If a ghost was eaten and other ghosts are not close, we should do this action!
+        if ghostsEaten > 0 and distanceFromClosestGhost > safeDistance:
             return (boardWidth + boardHeight) * 100  # Eat the ghost!
 
-        if distanceFromClosestGhost <= safe_distance:
-            return -5 * (safe_distance - distanceFromClosestGhost)
-    elif ghostsEaten > 0:
+        # If a ghost is too close, we should avoid this action, according to the distance
+        if distanceFromClosestGhost <= safeDistance:
+            totalValue += -50 * (safeDistance - distanceFromClosestGhost)
+    elif ghostsEaten > 0:  # If there are no normal ghosts and we have eaten a ghost with this action
         return (boardWidth + boardHeight) * 100  # Eat the ghost!
 
+    # Implements a mechanism for hunting scared ghosts
+    # We prioritize hunting a ghost over eating food (we do this by multiplying the distance difference by 5)
     scaredGhosts = [convertActionToPosition(ghost.getPosition(), ghost.getDirection()) for ghost in newGhostStates if ghost.scaredTimer > 0]
     if len(scaredGhosts) > 0:
-        distanceFromClosestGhost = mazeDistanceToClosestPoint(successorGameState, scaredGhosts)
-        total_value += (boardWidth + boardHeight - distanceFromClosestGhost) * 5 # multiply by 5 to prefer eating a ghost
+        distanceFromClosestGhost = distanceFunction(successorGameState, scaredGhosts)
+        totalValue += (boardWidth + boardHeight - distanceFromClosestGhost) * 5  # multiply by 5 to prefer eating a ghost
 
-    if oldFoodCount > newFoodCount:
+    if oldFoodCount > newFoodCount:  # If we ate some food in the successor state
         distanceFromClosestFood = 0
-    elif newFoodCount > 0:
-        distanceFromClosestFood = mazeDistanceToClosestPoint(successorGameState, newFood)
+    elif newFoodCount > 0:  # Checks distance to closest food (makes sure some food exists)
+        distanceFromClosestFood = distanceFunction(successorGameState, newFood)
+    else:  # Should not occur
+        distanceFromClosestFood = 0  # Defaults to zero
 
-    total_value += (boardWidth + boardHeight - distanceFromClosestFood)
+    totalValue += boardWidth + boardHeight - distanceFromClosestFood
 
-    return total_value
+    return totalValue
 
 def scoreEvaluationFunction(currentGameState):
   """
