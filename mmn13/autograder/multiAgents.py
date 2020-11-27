@@ -32,24 +32,25 @@ def convertActionToPosition(current_position, action):
 
 
 def mazeDistanceToClosestPoint(state, pointsList):
-    calculated_positions = []
+    # Basically the same BFS code from mmn11
+    calculatedPositions = []
     frontier = util.Queue()
 
     frontier.push((state, 0))
     while not frontier.isEmpty():
-        current_state, distance = frontier.pop()
+        currentState, distance = frontier.pop()
 
-        if current_state.getPacmanPosition() in calculated_positions:
+        if currentState.getPacmanPosition() in calculatedPositions:
             continue
-        calculated_positions.append(current_state.getPacmanPosition())
+        calculatedPositions.append(currentState.getPacmanPosition())
 
         for p in pointsList:
-            if util.manhattanDistance(current_state.getPacmanPosition(), p) < 1:
+            if util.manhattanDistance(currentState.getPacmanPosition(), p) < 1:
                 return distance
 
-        for action in current_state.getLegalActions():
-            successor = current_state.generatePacmanSuccessor(action)
-            if successor.getPacmanPosition() in calculated_positions:
+        for action in currentState.getLegalActions():
+            successor = currentState.generatePacmanSuccessor(action)
+            if successor.getPacmanPosition() in calculatedPositions:
                 continue
             frontier.push((successor, distance + 1))
 
@@ -125,7 +126,7 @@ class ReflexAgent(Agent):
     totalValue = 0
 
     # Since openClassic doesn't have any walls, we better use manhattan distance instead of maze distance
-    # In mazes where there are walls, you mazeDistanceToClosestPoint as distanceFunction
+    # In mazes where there are walls, you should use mazeDistanceToClosestPoint as distanceFunction
     distanceFunction = manhattanDistanceToClosestPoint
 
     # Checks if any of the ghosts was eaten in the successor state (indicated by drastic change in location)
@@ -157,6 +158,8 @@ class ReflexAgent(Agent):
         distanceFromClosestGhost = distanceFunction(successorGameState, scaredGhosts)
         totalValue += (boardWidth + boardHeight - distanceFromClosestGhost) * 5  # multiply by 5 to prefer eating a ghost
 
+    # Implements food eating: First we check if we just ate some food, and if not,
+    #                         Adds some points according to the distance to the closest food
     if oldFoodCount > newFoodCount:  # If we ate some food in the successor state
         distanceFromClosestFood = 0
     elif newFoodCount > 0:  # Checks distance to closest food (makes sure some food exists)
@@ -309,6 +312,7 @@ class AlphaBetaAgent(MultiAgentSearchAgent):
 
       bestAction = Directions.STOP
       Actions = state.getLegalActions(agentIndex)
+
       """
       #     Uncomment this to remove 'Stop' action
       if Directions.STOP in Actions:
