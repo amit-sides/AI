@@ -198,6 +198,7 @@ class MultiAgentSearchAgent(Agent):
     self.evaluationFunction = util.lookup(evalFn, globals())
     self.depth = int(depth)
 
+
 class MinimaxAgent(MultiAgentSearchAgent):
   """
     Your minimax agent (question 2)
@@ -223,8 +224,51 @@ class MinimaxAgent(MultiAgentSearchAgent):
       gameState.getNumAgents():
         Returns the total number of agents in the game
     """
-    "*** YOUR CODE HERE ***"
-    util.raiseNotDefined()
+    value, action = self.calculateMinimaxState(gameState, self.depth, 0)
+    return action
+
+  def calculateMinimaxState(self, state, depth, agentIndex):
+      # If we calculated all agents in all depths
+      if depth == 0 and agentIndex == 0:
+          return self.evaluationFunction(state), Directions.STOP
+
+      # Calculate index of next agent
+      nextAgentIndex = agentIndex + 1
+      if nextAgentIndex >= state.getNumAgents():
+          depth -= 1
+          nextAgentIndex = 0
+
+      # Set parameters of node according to agent (max node for pacman, min node for ghost)
+      if agentIndex == 0:
+          # Max node
+          value = -float("Inf")
+          compareFunction = max
+      else:
+          # Min node
+          value = float("Inf")
+          compareFunction = min
+
+      if len(state.getLegalActions(agentIndex)) == 0:
+          stateValue, _ = self.calculateMinimaxState(state, depth, nextAgentIndex)
+          return stateValue, Directions.STOP
+
+      bestAction = Directions.STOP
+      Actions = state.getLegalActions(agentIndex)
+      """
+      #     Uncomment this to remove 'Stop' action
+      if Directions.STOP in Actions:
+          Actions.remove(Directions.STOP)
+      """
+
+      for action in Actions:
+          successorState = state.generateSuccessor(agentIndex, action)
+          stateValue, _ = self.calculateMinimaxState(successorState, depth, nextAgentIndex)
+          value = compareFunction(value, stateValue)
+          if value == stateValue:
+              bestAction = action
+
+      return value, bestAction
+
 
 class AlphaBetaAgent(MultiAgentSearchAgent):
   """
@@ -235,8 +279,61 @@ class AlphaBetaAgent(MultiAgentSearchAgent):
     """
       Returns the minimax action using self.depth and self.evaluationFunction
     """
-    "*** YOUR CODE HERE ***"
-    util.raiseNotDefined()
+    value, action = self.calculateAlphaBetaState(gameState, self.depth, 0, -float("Inf"), float("Inf"))
+    return action
+
+  def calculateAlphaBetaState(self, state, depth, agentIndex, alpha, beta):
+      # If we calculated all agents in all depths
+      if depth == 0 and agentIndex == 0:
+          return self.evaluationFunction(state), Directions.STOP
+
+      # Calculate index of next agent
+      nextAgentIndex = agentIndex + 1
+      if nextAgentIndex >= state.getNumAgents():
+          depth -= 1
+          nextAgentIndex = 0
+
+      # Set parameters of node according to agent (max node for pacman, min node for ghost)
+      if agentIndex == 0:
+          # Max node
+          value = -float("Inf")
+          compareFunction = max
+      else:
+          # Min node
+          value = float("Inf")
+          compareFunction = min
+
+      if len(state.getLegalActions(agentIndex)) == 0:
+          stateValue, _ = self.calculateAlphaBetaState(state, depth, nextAgentIndex, alpha, beta)
+          return stateValue, Directions.STOP
+
+      bestAction = Directions.STOP
+      Actions = state.getLegalActions(agentIndex)
+      """
+      #     Uncomment this to remove 'Stop' action
+      if Directions.STOP in Actions:
+          Actions.remove(Directions.STOP)
+      """
+
+      for action in Actions:
+          successorState = state.generateSuccessor(agentIndex, action)
+          stateValue, _ = self.calculateAlphaBetaState(successorState, depth, nextAgentIndex, alpha, beta)
+          value = compareFunction(value, stateValue)
+          if value == stateValue:
+              bestAction = action
+
+          # Check for node type (min/max) and check for pruning
+          if agentIndex == 0:
+              if value >= beta:
+                  return value, bestAction
+              alpha = max(alpha, value)
+          else:
+              if value <= alpha:
+                  return value, bestAction
+              beta = min(beta, value)
+
+
+      return value, bestAction
 
 class ExpectimaxAgent(MultiAgentSearchAgent):
   """
@@ -250,8 +347,56 @@ class ExpectimaxAgent(MultiAgentSearchAgent):
       All ghosts should be modeled as choosing uniformly at random from their
       legal moves.
     """
-    "*** YOUR CODE HERE ***"
-    util.raiseNotDefined()
+    value, action = self.calculateExpectimaxState(gameState, self.depth, 0)
+    return action
+
+  def calculateExpectimaxState(self, state, depth, agentIndex):
+      # If we calculated all agents in all depths
+      if depth == 0 and agentIndex == 0:
+          return self.evaluationFunction(state), Directions.STOP
+
+      # Calculate index of next agent
+      nextAgentIndex = agentIndex + 1
+      if nextAgentIndex >= state.getNumAgents():
+          depth -= 1
+          nextAgentIndex = 0
+
+      # Set parameters of node according to agent (max node for pacman, min node for ghost)
+      if agentIndex == 0:
+          # Max node
+          value = -float("Inf")
+          estimationFunction = max
+      else:
+          # Min node
+          value = 0
+          estimationFunction = lambda totalSum, valueToAdd: totalSum + valueToAdd
+
+      if len(state.getLegalActions(agentIndex)) == 0:
+          stateValue, _ = self.calculateExpectimaxState(state, depth, nextAgentIndex)
+          return stateValue, Directions.STOP
+
+      bestAction = Directions.STOP
+      Actions = state.getLegalActions(agentIndex)
+      """
+      #     Uncomment this to remove 'Stop' action
+      if Directions.STOP in Actions:
+          Actions.remove(Directions.STOP)
+      """
+
+      for action in Actions:
+          successorState = state.generateSuccessor(agentIndex, action)
+          stateValue, _ = self.calculateExpectimaxState(successorState, depth, nextAgentIndex)
+          value = estimationFunction(value, stateValue)
+          if value == stateValue:
+              bestAction = action
+
+      if agentIndex == 0:
+          # With pacman, we select the best option!
+          return value, bestAction
+      else:
+          # With ghost, we expect the average value
+          average = float(value) / len(Actions)
+          return average, Directions.STOP  # The action doesn't matter for the ghosts
 
 def betterEvaluationFunction(currentGameState):
   """
