@@ -1,3 +1,8 @@
+"""
+Created on Oct 20, 2013
+
+@author: Ofra
+"""
 from util import Pair
 import copy
 from propositionLayer import PropositionLayer
@@ -96,42 +101,41 @@ class GraphPlan(object):
     return None
      
   def gpSearch(self, Graph, subGoals, plan, level):
-    if subGoals == []:
-      newGoals = []
-      for action in plan:
-        for prop in action.getPre():
-          if prop not in newGoals:
-            newGoals.append(prop)						
-      newPlan = self.extract(Graph, newGoals, level - 1)
-      if newPlan is None:
-        return None
-      else:
-        return newPlan + plan
+	if subGoals == []:
+	  newGoals = []
+	  for action in plan:
+		for prop in action.getPre():
+		  if prop not in newGoals:
+			newGoals.append(prop)						
+	  newPlan = self.extract(Graph, newGoals, level - 1)
+	  if newPlan is None:
+		return None
+	  else:
+		return newPlan + plan
 		
-    prop = subGoals[0]
-    providers = []
-    for action1 in [act for act in Graph[level].getActionLayer().getActions() if prop in act.getAdd()]:
-      noMutex = True
-      for action2 in plan:
-        if Pair(action1, action2) not in self.independentActions:
-          noMutex = False
-          break
-      if noMutex:
-        providers.append(action1)
-    for action in providers:
-      newSubGoals = [g for g in subGoals if g not in action.getAdd()]
-      planClone = list(plan)
-      planClone.append(action)
-      newPlan = self.gpSearch(Graph, newSubGoals, planClone, level)
-      if newPlan is not None:
-        return newPlan
-    return None
+	prop = subGoals[0]
+	providers = []
+	for action1 in [act for act in Graph[level].getActionLayer().getActions() if prop in act.getAdd()]:
+	  noMutex = True
+	  for action2 in plan:
+		if Pair(action1, action2) not in self.independentActions:
+		  noMutex = False
+		  break
+	  if noMutex:
+		providers.append(action1)
+	for action in providers:
+	  newSubGoals = [g for g in subGoals if g not in action.getAdd()]
+	  planClone = list(plan)
+	  planClone.append(action)
+	  newPlan = self.gpSearch(Graph, newSubGoals, planClone, level)
+	  if newPlan is not None:
+		return newPlan
+	return None
     
 	
   def goalStateNotInPropLayer(self, propositions):
     """
-    Helper function that receives a  list of propositions (propositions) and returns true 
-    if not all the goal propositions are in that list    
+    Helper function that checks whether all propositions of the goal state are in the current graph level
     """
     for goal in self.goal:
       if goal not in propositions:
@@ -199,49 +203,30 @@ class GraphPlan(object):
     return True  
 
 def independentPair(a1, a2):
-    """
-    Returns true if the actions are neither have inconsistent effects
-    nor they interfere one with the other.
-    You might want to use those functions:
-    a1.getPre() returns the pre list of a1
-    a1.getAdd() returns the add list of a1
-    a1.getDelete() return the del list of a1
-    a1.isPreCond(p) returns true is p is in a1.getPre()
-    a1.isPosEffect(p) returns true is p is in a1.getAdd()
-    a1.isNegEffect(p) returns true is p is in a1.getDel()
-    """
-
-    # Checks for inconsistent effects
-    a1_effects = set(a1.getAdd())
-    a1_negations = set(a1.getDelete())
-    a2_effects = set(a2.getAdd())
-    a2_negations = set(a2.getDelete())
-    # Check if an effect of a2 negates an effect of a1
-    if len(a2_negations.intersection(a1_effects)) > 0:
-        return False
-    # Check if an effect of a1 negates an effect of a2
-    if len(a1_negations.intersection(a2_effects)) > 0:
-        return False
-
-
-    # Checks for interference
-    a1_preconditions = set(a1.getPre())
-    a2_preconditions = set(a1.getPre())
-    # Check if action a2 deletes a precondition of action a1
-    if len(a1_preconditions.intersection(a2_negations)) > 0:
-        return False
-    # Check if action a1 deletes a precondition of action a2
-    if len(a2_preconditions.intersection(a1_negations)) > 0:
-        return False
-
+  """
+  Returns true if the actions are neither have inconsistent effects
+  nor they interfere one with the other
+  """
+  if a1 == a2:
     return True
-
+  for p in a1.getDelete():
+    # Check if a1 deletes precondition of a2
+    # or if a1 deletes a positive effect of a2
+    if a2.isPreCond(p) or a2.isPosEffect(p):
+      return False
+  for p in a2.getDelete():
+    # Check if a2 deletes precondition of a1
+    # or if a2 deletes a positive effect of a1
+    if a1.isPreCond(p) or a1.isPosEffect(p):
+      return False
+  return True
+  
     
 if __name__ == '__main__':  
   import sys
   import time
   if len(sys.argv) != 1 and len(sys.argv) != 3:
-    print("Usage: GraphPlan.py domainName problemName")
+    print "Usage: GraphPlan.py domainName problemName"
     exit()
   domain = 'dwrDomain.txt'
   problem = 'dwrProblem.txt'
@@ -254,7 +239,7 @@ if __name__ == '__main__':
   plan = gp.graphPlan()
   elapsed = time.clock() - start
   if plan is not None:
-    print("Plan found with %d actions in %.2f seconds" % (len([act for act in plan if not act.isNoOp()]), elapsed))
+    print "Plan found with %d actions in %.2f seconds" % (len([act for act in plan if not act.isNoOp()]), elapsed)
   else:
-    print("Could not find a plan in %.2f seconds" %  elapsed)
+    print "Could not find a plan in %.2f seconds" %  elapsed
  

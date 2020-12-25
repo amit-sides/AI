@@ -1,0 +1,2 @@
+Begin state: disk 0on peg a disk 0on disk 1 disk 1on peg a disk 1on disk 2 clear b clear c disk 2on peg a disk 2on bottom a disk 0 on top a
+Goal state: disk 0on peg c disk 0on disk 1 disk 1on peg c disk 1on disk 2 clear b clear a disk 2on peg c disk 2on bottom c disk 0 on top c

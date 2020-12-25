@@ -199,44 +199,31 @@ class GraphPlan(object):
     return True  
 
 def independentPair(a1, a2):
-    """
-    Returns true if the actions are neither have inconsistent effects
-    nor they interfere one with the other.
-    You might want to use those functions:
-    a1.getPre() returns the pre list of a1
-    a1.getAdd() returns the add list of a1
-    a1.getDelete() return the del list of a1
-    a1.isPreCond(p) returns true is p is in a1.getPre()
-    a1.isPosEffect(p) returns true is p is in a1.getAdd()
-    a1.isNegEffect(p) returns true is p is in a1.getDel()
-    """
+  """
+  Returns true if the actions are neither have inconsistent effects
+  nor they interfere one with the other.
+  You might want to use those functions:
+  a1.getPre() returns the pre list of a1
+  a1.getAdd() returns the add list of a1
+  a1.getDelete() return the del list of a1
+  a1.isPreCond(p) returns true is p is in a1.getPre()
+  a1.isPosEffect(p) returns true is p is in a1.getAdd()
+  a1.isNegEffect(p) returns true is p is in a1.getDel()
+  """
+  "*** YOUR CODE HERE ***"
 
-    # Checks for inconsistent effects
-    a1_effects = set(a1.getAdd())
-    a1_negations = set(a1.getDelete())
-    a2_effects = set(a2.getAdd())
-    a2_negations = set(a2.getDelete())
-    # Check if an effect of a2 negates an effect of a1
-    if len(a2_negations.intersection(a1_effects)) > 0:
-        return False
-    # Check if an effect of a1 negates an effect of a2
-    if len(a1_negations.intersection(a2_effects)) > 0:
-        return False
+  for pre in a1.getDelete():
+    if a2.isPreCond(pre) or a2.isPosEffect(pre):
+      return False
+
+  for p in a2.getDelete():
+    if a1.isPreCond(p) or a1.isPosEffect(p):
+      return False
+
+  return True
 
 
-    # Checks for interference
-    a1_preconditions = set(a1.getPre())
-    a2_preconditions = set(a1.getPre())
-    # Check if action a2 deletes a precondition of action a1
-    if len(a1_preconditions.intersection(a2_negations)) > 0:
-        return False
-    # Check if action a1 deletes a precondition of action a2
-    if len(a2_preconditions.intersection(a1_negations)) > 0:
-        return False
 
-    return True
-
-    
 if __name__ == '__main__':  
   import sys
   import time

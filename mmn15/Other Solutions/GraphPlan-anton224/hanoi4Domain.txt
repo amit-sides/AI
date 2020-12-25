@@ -1,0 +1,723 @@
+Propositions:
+clear a clear b clear c disk 0on peg a disk 0on peg b disk 0on peg c disk 1on peg a disk 1on peg b disk 1on peg c disk 2on peg a disk 2on peg b disk 2on peg c disk 3on peg a disk 3on peg b disk 3on peg c disk 0on top a disk 0on top b disk 0on top c disk 1on top a disk 1on top b disk 1on top c disk 2on top a disk 2on top b disk 2on top c disk 3on top a disk 3on top b disk 3on top c disk 0on bottom a disk 0on bottom b disk 0on bottom c disk 1on bottom a disk 1on bottom b disk 1on bottom c disk 2on bottom a disk 2on bottom b disk 2on bottom c disk 3on bottom a disk 3on bottom b disk 3on bottom c disk 0on disk 1 disk 0on disk 2 disk 0on disk 3 disk 1on disk 2 disk 1on disk 3 disk 2on disk 3 
+Actions:
+Name: move disk 0 from disk 1 from peg a to bottom b
+pre: disk 0on disk 1 disk 0on top a disk 0on peg a disk 1on peg a clear b
+add: disk 0on top b disk 0on bottom b disk 0on peg b disk 1on top a
+delete: disk 0on disk 1 disk 0on top a disk 0on peg a clear b
+Name: move disk 0 from disk 2 from peg a to bottom b
+pre: disk 0on disk 2 disk 0on top a disk 0on peg a disk 2on peg a clear b
+add: disk 0on top b disk 0on bottom b disk 0on peg b disk 2on top a
+delete: disk 0on disk 2 disk 0on top a disk 0on peg a clear b
+Name: move disk 0 from disk 3 from peg a to bottom b
+pre: disk 0on disk 3 disk 0on top a disk 0on peg a disk 3on peg a clear b
+add: disk 0on top b disk 0on bottom b disk 0on peg b disk 3on top a
+delete: disk 0on disk 3 disk 0on top a disk 0on peg a clear b
+Name: move disk 1 from disk 2 from peg a to bottom b
+pre: disk 1on disk 2 disk 1on top a disk 1on peg a disk 2on peg a clear b
+add: disk 1on top b disk 1on bottom b disk 1on peg b disk 2on top a
+delete: disk 1on disk 2 disk 1on top a disk 1on peg a clear b
+Name: move disk 1 from disk 3 from peg a to bottom b
+pre: disk 1on disk 3 disk 1on top a disk 1on peg a disk 3on peg a clear b
+add: disk 1on top b disk 1on bottom b disk 1on peg b disk 3on top a
+delete: disk 1on disk 3 disk 1on top a disk 1on peg a clear b
+Name: move disk 2 from disk 3 from peg a to bottom b
+pre: disk 2on disk 3 disk 2on top a disk 2on peg a disk 3on peg a clear b
+add: disk 2on top b disk 2on bottom b disk 2on peg b disk 3on top a
+delete: disk 2on disk 3 disk 2on top a disk 2on peg a clear b
+Name: move disk 0 from disk 1 from peg a to bottom c
+pre: disk 0on disk 1 disk 0on top a disk 0on peg a disk 1on peg a clear c
+add: disk 0on top c disk 0on bottom c disk 0on peg c disk 1on top a
+delete: disk 0on disk 1 disk 0on top a disk 0on peg a clear c
+Name: move disk 0 from disk 2 from peg a to bottom c
+pre: disk 0on disk 2 disk 0on top a disk 0on peg a disk 2on peg a clear c
+add: disk 0on top c disk 0on bottom c disk 0on peg c disk 2on top a
+delete: disk 0on disk 2 disk 0on top a disk 0on peg a clear c
+Name: move disk 0 from disk 3 from peg a to bottom c
+pre: disk 0on disk 3 disk 0on top a disk 0on peg a disk 3on peg a clear c
+add: disk 0on top c disk 0on bottom c disk 0on peg c disk 3on top a
+delete: disk 0on disk 3 disk 0on top a disk 0on peg a clear c
+Name: move disk 1 from disk 2 from peg a to bottom c
+pre: disk 1on disk 2 disk 1on top a disk 1on peg a disk 2on peg a clear c
+add: disk 1on top c disk 1on bottom c disk 1on peg c disk 2on top a
+delete: disk 1on disk 2 disk 1on top a disk 1on peg a clear c
+Name: move disk 1 from disk 3 from peg a to bottom c
+pre: disk 1on disk 3 disk 1on top a disk 1on peg a disk 3on peg a clear c
+add: disk 1on top c disk 1on bottom c disk 1on peg c disk 3on top a
+delete: disk 1on disk 3 disk 1on top a disk 1on peg a clear c
+Name: move disk 2 from disk 3 from peg a to bottom c
+pre: disk 2on disk 3 disk 2on top a disk 2on peg a disk 3on peg a clear c
+add: disk 2on top c disk 2on bottom c disk 2on peg c disk 3on top a
+delete: disk 2on disk 3 disk 2on top a disk 2on peg a clear c
+Name: move disk 0 from disk 1 from peg b to bottom a
+pre: disk 0on disk 1 disk 0on top b disk 0on peg b disk 1on peg b clear a
+add: disk 0on top a disk 0on bottom a disk 0on peg a disk 1on top b
+delete: disk 0on disk 1 disk 0on top b disk 0on peg b clear a
+Name: move disk 0 from disk 2 from peg b to bottom a
+pre: disk 0on disk 2 disk 0on top b disk 0on peg b disk 2on peg b clear a
+add: disk 0on top a disk 0on bottom a disk 0on peg a disk 2on top b
+delete: disk 0on disk 2 disk 0on top b disk 0on peg b clear a
+Name: move disk 0 from disk 3 from peg b to bottom a
+pre: disk 0on disk 3 disk 0on top b disk 0on peg b disk 3on peg b clear a
+add: disk 0on top a disk 0on bottom a disk 0on peg a disk 3on top b
+delete: disk 0on disk 3 disk 0on top b disk 0on peg b clear a
+Name: move disk 1 from disk 2 from peg b to bottom a
+pre: disk 1on disk 2 disk 1on top b disk 1on peg b disk 2on peg b clear a
+add: disk 1on top a disk 1on bottom a disk 1on peg a disk 2on top b
+delete: disk 1on disk 2 disk 1on top b disk 1on peg b clear a
+Name: move disk 1 from disk 3 from peg b to bottom a
+pre: disk 1on disk 3 disk 1on top b disk 1on peg b disk 3on peg b clear a
+add: disk 1on top a disk 1on bottom a disk 1on peg a disk 3on top b
+delete: disk 1on disk 3 disk 1on top b disk 1on peg b clear a
+Name: move disk 2 from disk 3 from peg b to bottom a
+pre: disk 2on disk 3 disk 2on top b disk 2on peg b disk 3on peg b clear a
+add: disk 2on top a disk 2on bottom a disk 2on peg a disk 3on top b
+delete: disk 2on disk 3 disk 2on top b disk 2on peg b clear a
+Name: move disk 0 from disk 1 from peg b to bottom c
+pre: disk 0on disk 1 disk 0on top b disk 0on peg b disk 1on peg b clear c
+add: disk 0on top c disk 0on bottom c disk 0on peg c disk 1on top b
+delete: disk 0on disk 1 disk 0on top b disk 0on peg b clear c
+Name: move disk 0 from disk 2 from peg b to bottom c
+pre: disk 0on disk 2 disk 0on top b disk 0on peg b disk 2on peg b clear c
+add: disk 0on top c disk 0on bottom c disk 0on peg c disk 2on top b
+delete: disk 0on disk 2 disk 0on top b disk 0on peg b clear c
+Name: move disk 0 from disk 3 from peg b to bottom c
+pre: disk 0on disk 3 disk 0on top b disk 0on peg b disk 3on peg b clear c
+add: disk 0on top c disk 0on bottom c disk 0on peg c disk 3on top b
+delete: disk 0on disk 3 disk 0on top b disk 0on peg b clear c
+Name: move disk 1 from disk 2 from peg b to bottom c
+pre: disk 1on disk 2 disk 1on top b disk 1on peg b disk 2on peg b clear c
+add: disk 1on top c disk 1on bottom c disk 1on peg c disk 2on top b
+delete: disk 1on disk 2 disk 1on top b disk 1on peg b clear c
+Name: move disk 1 from disk 3 from peg b to bottom c
+pre: disk 1on disk 3 disk 1on top b disk 1on peg b disk 3on peg b clear c
+add: disk 1on top c disk 1on bottom c disk 1on peg c disk 3on top b
+delete: disk 1on disk 3 disk 1on top b disk 1on peg b clear c
+Name: move disk 2 from disk 3 from peg b to bottom c
+pre: disk 2on disk 3 disk 2on top b disk 2on peg b disk 3on peg b clear c
+add: disk 2on top c disk 2on bottom c disk 2on peg c disk 3on top b
+delete: disk 2on disk 3 disk 2on top b disk 2on peg b clear c
+Name: move disk 0 from disk 1 from peg c to bottom a
+pre: disk 0on disk 1 disk 0on top c disk 0on peg c disk 1on peg c clear a
+add: disk 0on top a disk 0on bottom a disk 0on peg a disk 1on top c
+delete: disk 0on disk 1 disk 0on top c disk 0on peg c clear a
+Name: move disk 0 from disk 2 from peg c to bottom a
+pre: disk 0on disk 2 disk 0on top c disk 0on peg c disk 2on peg c clear a
+add: disk 0on top a disk 0on bottom a disk 0on peg a disk 2on top c
+delete: disk 0on disk 2 disk 0on top c disk 0on peg c clear a
+Name: move disk 0 from disk 3 from peg c to bottom a
+pre: disk 0on disk 3 disk 0on top c disk 0on peg c disk 3on peg c clear a
+add: disk 0on top a disk 0on bottom a disk 0on peg a disk 3on top c
+delete: disk 0on disk 3 disk 0on top c disk 0on peg c clear a
+Name: move disk 1 from disk 2 from peg c to bottom a
+pre: disk 1on disk 2 disk 1on top c disk 1on peg c disk 2on peg c clear a
+add: disk 1on top a disk 1on bottom a disk 1on peg a disk 2on top c
+delete: disk 1on disk 2 disk 1on top c disk 1on peg c clear a
+Name: move disk 1 from disk 3 from peg c to bottom a
+pre: disk 1on disk 3 disk 1on top c disk 1on peg c disk 3on peg c clear a
+add: disk 1on top a disk 1on bottom a disk 1on peg a disk 3on top c
+delete: disk 1on disk 3 disk 1on top c disk 1on peg c clear a
+Name: move disk 2 from disk 3 from peg c to bottom a
+pre: disk 2on disk 3 disk 2on top c disk 2on peg c disk 3on peg c clear a
+add: disk 2on top a disk 2on bottom a disk 2on peg a disk 3on top c
+delete: disk 2on disk 3 disk 2on top c disk 2on peg c clear a
+Name: move disk 0 from disk 1 from peg c to bottom b
+pre: disk 0on disk 1 disk 0on top c disk 0on peg c disk 1on peg c clear b
+add: disk 0on top b disk 0on bottom b disk 0on peg b disk 1on top c
+delete: disk 0on disk 1 disk 0on top c disk 0on peg c clear b
+Name: move disk 0 from disk 2 from peg c to bottom b
+pre: disk 0on disk 2 disk 0on top c disk 0on peg c disk 2on peg c clear b
+add: disk 0on top b disk 0on bottom b disk 0on peg b disk 2on top c
+delete: disk 0on disk 2 disk 0on top c disk 0on peg c clear b
+Name: move disk 0 from disk 3 from peg c to bottom b
+pre: disk 0on disk 3 disk 0on top c disk 0on peg c disk 3on peg c clear b
+add: disk 0on top b disk 0on bottom b disk 0on peg b disk 3on top c
+delete: disk 0on disk 3 disk 0on top c disk 0on peg c clear b
+Name: move disk 1 from disk 2 from peg c to bottom b
+pre: disk 1on disk 2 disk 1on top c disk 1on peg c disk 2on peg c clear b
+add: disk 1on top b disk 1on bottom b disk 1on peg b disk 2on top c
+delete: disk 1on disk 2 disk 1on top c disk 1on peg c clear b
+Name: move disk 1 from disk 3 from peg c to bottom b
+pre: disk 1on disk 3 disk 1on top c disk 1on peg c disk 3on peg c clear b
+add: disk 1on top b disk 1on bottom b disk 1on peg b disk 3on top c
+delete: disk 1on disk 3 disk 1on top c disk 1on peg c clear b
+Name: move disk 2 from disk 3 from peg c to bottom b
+pre: disk 2on disk 3 disk 2on top c disk 2on peg c disk 3on peg c clear b
+add: disk 2on top b disk 2on bottom b disk 2on peg b disk 3on top c
+delete: disk 2on disk 3 disk 2on top c disk 2on peg c clear b
+Name: move disk 0 from bottom a to disk 1 on peg b
+pre: disk 0on peg a disk 0on top a disk 0on bottom a disk 1on peg b disk 1on top b
+add: disk 0on top b disk 0on disk 1 disk 0on peg b clear a
+delete: disk 0on peg a disk 0on top a disk 0on bottom a disk 1on top b
+Name: move disk 0 from bottom a to disk 2 on peg b
+pre: disk 0on peg a disk 0on top a disk 0on bottom a disk 2on peg b disk 2on top b
+add: disk 0on top b disk 0on disk 2 disk 0on peg b clear a
+delete: disk 0on peg a disk 0on top a disk 0on bottom a disk 2on top b
+Name: move disk 0 from bottom a to disk 3 on peg b
+pre: disk 0on peg a disk 0on top a disk 0on bottom a disk 3on peg b disk 3on top b
+add: disk 0on top b disk 0on disk 3 disk 0on peg b clear a
+delete: disk 0on peg a disk 0on top a disk 0on bottom a disk 3on top b
+Name: move disk 1 from bottom a to disk 2 on peg b
+pre: disk 1on peg a disk 1on top a disk 1on bottom a disk 2on peg b disk 2on top b
+add: disk 1on top b disk 1on disk 2 disk 1on peg b clear a
+delete: disk 1on peg a disk 1on top a disk 1on bottom a disk 2on top b
+Name: move disk 1 from bottom a to disk 3 on peg b
+pre: disk 1on peg a disk 1on top a disk 1on bottom a disk 3on peg b disk 3on top b
+add: disk 1on top b disk 1on disk 3 disk 1on peg b clear a
+delete: disk 1on peg a disk 1on top a disk 1on bottom a disk 3on top b
+Name: move disk 2 from bottom a to disk 3 on peg b
+pre: disk 2on peg a disk 2on top a disk 2on bottom a disk 3on peg b disk 3on top b
+add: disk 2on top b disk 2on disk 3 disk 2on peg b clear a
+delete: disk 2on peg a disk 2on top a disk 2on bottom a disk 3on top b
+Name: move disk 0 from bottom a to disk 1 on peg c
+pre: disk 0on peg a disk 0on top a disk 0on bottom a disk 1on peg c disk 1on top c
+add: disk 0on top c disk 0on disk 1 disk 0on peg c clear a
+delete: disk 0on peg a disk 0on top a disk 0on bottom a disk 1on top c
+Name: move disk 0 from bottom a to disk 2 on peg c
+pre: disk 0on peg a disk 0on top a disk 0on bottom a disk 2on peg c disk 2on top c
+add: disk 0on top c disk 0on disk 2 disk 0on peg c clear a
+delete: disk 0on peg a disk 0on top a disk 0on bottom a disk 2on top c
+Name: move disk 0 from bottom a to disk 3 on peg c
+pre: disk 0on peg a disk 0on top a disk 0on bottom a disk 3on peg c disk 3on top c
+add: disk 0on top c disk 0on disk 3 disk 0on peg c clear a
+delete: disk 0on peg a disk 0on top a disk 0on bottom a disk 3on top c
+Name: move disk 1 from bottom a to disk 2 on peg c
+pre: disk 1on peg a disk 1on top a disk 1on bottom a disk 2on peg c disk 2on top c
+add: disk 1on top c disk 1on disk 2 disk 1on peg c clear a
+delete: disk 1on peg a disk 1on top a disk 1on bottom a disk 2on top c
+Name: move disk 1 from bottom a to disk 3 on peg c
+pre: disk 1on peg a disk 1on top a disk 1on bottom a disk 3on peg c disk 3on top c
+add: disk 1on top c disk 1on disk 3 disk 1on peg c clear a
+delete: disk 1on peg a disk 1on top a disk 1on bottom a disk 3on top c
+Name: move disk 2 from bottom a to disk 3 on peg c
+pre: disk 2on peg a disk 2on top a disk 2on bottom a disk 3on peg c disk 3on top c
+add: disk 2on top c disk 2on disk 3 disk 2on peg c clear a
+delete: disk 2on peg a disk 2on top a disk 2on bottom a disk 3on top c
+Name: move disk 0 from bottom b to disk 1 on peg a
+pre: disk 0on peg b disk 0on top b disk 0on bottom b disk 1on peg a disk 1on top a
+add: disk 0on top a disk 0on disk 1 disk 0on peg a clear b
+delete: disk 0on peg b disk 0on top b disk 0on bottom b disk 1on top a
+Name: move disk 0 from bottom b to disk 2 on peg a
+pre: disk 0on peg b disk 0on top b disk 0on bottom b disk 2on peg a disk 2on top a
+add: disk 0on top a disk 0on disk 2 disk 0on peg a clear b
+delete: disk 0on peg b disk 0on top b disk 0on bottom b disk 2on top a
+Name: move disk 0 from bottom b to disk 3 on peg a
+pre: disk 0on peg b disk 0on top b disk 0on bottom b disk 3on peg a disk 3on top a
+add: disk 0on top a disk 0on disk 3 disk 0on peg a clear b
+delete: disk 0on peg b disk 0on top b disk 0on bottom b disk 3on top a
+Name: move disk 1 from bottom b to disk 2 on peg a
+pre: disk 1on peg b disk 1on top b disk 1on bottom b disk 2on peg a disk 2on top a
+add: disk 1on top a disk 1on disk 2 disk 1on peg a clear b
+delete: disk 1on peg b disk 1on top b disk 1on bottom b disk 2on top a
+Name: move disk 1 from bottom b to disk 3 on peg a
+pre: disk 1on peg b disk 1on top b disk 1on bottom b disk 3on peg a disk 3on top a
+add: disk 1on top a disk 1on disk 3 disk 1on peg a clear b
+delete: disk 1on peg b disk 1on top b disk 1on bottom b disk 3on top a
+Name: move disk 2 from bottom b to disk 3 on peg a
+pre: disk 2on peg b disk 2on top b disk 2on bottom b disk 3on peg a disk 3on top a
+add: disk 2on top a disk 2on disk 3 disk 2on peg a clear b
+delete: disk 2on peg b disk 2on top b disk 2on bottom b disk 3on top a
+Name: move disk 0 from bottom b to disk 1 on peg c
+pre: disk 0on peg b disk 0on top b disk 0on bottom b disk 1on peg c disk 1on top c
+add: disk 0on top c disk 0on disk 1 disk 0on peg c clear b
+delete: disk 0on peg b disk 0on top b disk 0on bottom b disk 1on top c
+Name: move disk 0 from bottom b to disk 2 on peg c
+pre: disk 0on peg b disk 0on top b disk 0on bottom b disk 2on peg c disk 2on top c
+add: disk 0on top c disk 0on disk 2 disk 0on peg c clear b
+delete: disk 0on peg b disk 0on top b disk 0on bottom b disk 2on top c
+Name: move disk 0 from bottom b to disk 3 on peg c
+pre: disk 0on peg b disk 0on top b disk 0on bottom b disk 3on peg c disk 3on top c
+add: disk 0on top c disk 0on disk 3 disk 0on peg c clear b
+delete: disk 0on peg b disk 0on top b disk 0on bottom b disk 3on top c
+Name: move disk 1 from bottom b to disk 2 on peg c
+pre: disk 1on peg b disk 1on top b disk 1on bottom b disk 2on peg c disk 2on top c
+add: disk 1on top c disk 1on disk 2 disk 1on peg c clear b
+delete: disk 1on peg b disk 1on top b disk 1on bottom b disk 2on top c
+Name: move disk 1 from bottom b to disk 3 on peg c
+pre: disk 1on peg b disk 1on top b disk 1on bottom b disk 3on peg c disk 3on top c
+add: disk 1on top c disk 1on disk 3 disk 1on peg c clear b
+delete: disk 1on peg b disk 1on top b disk 1on bottom b disk 3on top c
+Name: move disk 2 from bottom b to disk 3 on peg c
+pre: disk 2on peg b disk 2on top b disk 2on bottom b disk 3on peg c disk 3on top c
+add: disk 2on top c disk 2on disk 3 disk 2on peg c clear b
+delete: disk 2on peg b disk 2on top b disk 2on bottom b disk 3on top c
+Name: move disk 0 from bottom c to disk 1 on peg a
+pre: disk 0on peg c disk 0on top c disk 0on bottom c disk 1on peg a disk 1on top a
+add: disk 0on top a disk 0on disk 1 disk 0on peg a clear c
+delete: disk 0on peg c disk 0on top c disk 0on bottom c disk 1on top a
+Name: move disk 0 from bottom c to disk 2 on peg a
+pre: disk 0on peg c disk 0on top c disk 0on bottom c disk 2on peg a disk 2on top a
+add: disk 0on top a disk 0on disk 2 disk 0on peg a clear c
+delete: disk 0on peg c disk 0on top c disk 0on bottom c disk 2on top a
+Name: move disk 0 from bottom c to disk 3 on peg a
+pre: disk 0on peg c disk 0on top c disk 0on bottom c disk 3on peg a disk 3on top a
+add: disk 0on top a disk 0on disk 3 disk 0on peg a clear c
+delete: disk 0on peg c disk 0on top c disk 0on bottom c disk 3on top a
+Name: move disk 1 from bottom c to disk 2 on peg a
+pre: disk 1on peg c disk 1on top c disk 1on bottom c disk 2on peg a disk 2on top a
+add: disk 1on top a disk 1on disk 2 disk 1on peg a clear c
+delete: disk 1on peg c disk 1on top c disk 1on bottom c disk 2on top a
+Name: move disk 1 from bottom c to disk 3 on peg a
+pre: disk 1on peg c disk 1on top c disk 1on bottom c disk 3on peg a disk 3on top a
+add: disk 1on top a disk 1on disk 3 disk 1on peg a clear c
+delete: disk 1on peg c disk 1on top c disk 1on bottom c disk 3on top a
+Name: move disk 2 from bottom c to disk 3 on peg a
+pre: disk 2on peg c disk 2on top c disk 2on bottom c disk 3on peg a disk 3on top a
+add: disk 2on top a disk 2on disk 3 disk 2on peg a clear c
+delete: disk 2on peg c disk 2on top c disk 2on bottom c disk 3on top a
+Name: move disk 0 from bottom c to disk 1 on peg b
+pre: disk 0on peg c disk 0on top c disk 0on bottom c disk 1on peg b disk 1on top b
+add: disk 0on top b disk 0on disk 1 disk 0on peg b clear c
+delete: disk 0on peg c disk 0on top c disk 0on bottom c disk 1on top b
+Name: move disk 0 from bottom c to disk 2 on peg b
+pre: disk 0on peg c disk 0on top c disk 0on bottom c disk 2on peg b disk 2on top b
+add: disk 0on top b disk 0on disk 2 disk 0on peg b clear c
+delete: disk 0on peg c disk 0on top c disk 0on bottom c disk 2on top b
+Name: move disk 0 from bottom c to disk 3 on peg b
+pre: disk 0on peg c disk 0on top c disk 0on bottom c disk 3on peg b disk 3on top b
+add: disk 0on top b disk 0on disk 3 disk 0on peg b clear c
+delete: disk 0on peg c disk 0on top c disk 0on bottom c disk 3on top b
+Name: move disk 1 from bottom c to disk 2 on peg b
+pre: disk 1on peg c disk 1on top c disk 1on bottom c disk 2on peg b disk 2on top b
+add: disk 1on top b disk 1on disk 2 disk 1on peg b clear c
+delete: disk 1on peg c disk 1on top c disk 1on bottom c disk 2on top b
+Name: move disk 1 from bottom c to disk 3 on peg b
+pre: disk 1on peg c disk 1on top c disk 1on bottom c disk 3on peg b disk 3on top b
+add: disk 1on top b disk 1on disk 3 disk 1on peg b clear c
+delete: disk 1on peg c disk 1on top c disk 1on bottom c disk 3on top b
+Name: move disk 2 from bottom c to disk 3 on peg b
+pre: disk 2on peg c disk 2on top c disk 2on bottom c disk 3on peg b disk 3on top b
+add: disk 2on top b disk 2on disk 3 disk 2on peg b clear c
+delete: disk 2on peg c disk 2on top c disk 2on bottom c disk 3on top b
+Name: move disk 0 from bottom a to bottom b
+pre: disk 0on peg a disk 0on top a disk 0on bottom a clear b
+add: disk 0on peg b disk 0on top b disk 0on bottom b clear a
+delete: disk 0on peg a disk 0on top a disk 0on bottom a clear b
+Name: move disk 1 from bottom a to bottom b
+pre: disk 1on peg a disk 1on top a disk 1on bottom a clear b
+add: disk 1on peg b disk 1on top b disk 1on bottom b clear a
+delete: disk 1on peg a disk 1on top a disk 1on bottom a clear b
+Name: move disk 2 from bottom a to bottom b
+pre: disk 2on peg a disk 2on top a disk 2on bottom a clear b
+add: disk 2on peg b disk 2on top b disk 2on bottom b clear a
+delete: disk 2on peg a disk 2on top a disk 2on bottom a clear b
+Name: move disk 3 from bottom a to bottom b
+pre: disk 3on peg a disk 3on top a disk 3on bottom a clear b
+add: disk 3on peg b disk 3on top b disk 3on bottom b clear a
+delete: disk 3on peg a disk 3on top a disk 3on bottom a clear b
+Name: move disk 0 from bottom a to bottom c
+pre: disk 0on peg a disk 0on top a disk 0on bottom a clear c
+add: disk 0on peg c disk 0on top c disk 0on bottom c clear a
+delete: disk 0on peg a disk 0on top a disk 0on bottom a clear c
+Name: move disk 1 from bottom a to bottom c
+pre: disk 1on peg a disk 1on top a disk 1on bottom a clear c
+add: disk 1on peg c disk 1on top c disk 1on bottom c clear a
+delete: disk 1on peg a disk 1on top a disk 1on bottom a clear c
+Name: move disk 2 from bottom a to bottom c
+pre: disk 2on peg a disk 2on top a disk 2on bottom a clear c
+add: disk 2on peg c disk 2on top c disk 2on bottom c clear a
+delete: disk 2on peg a disk 2on top a disk 2on bottom a clear c
+Name: move disk 3 from bottom a to bottom c
+pre: disk 3on peg a disk 3on top a disk 3on bottom a clear c
+add: disk 3on peg c disk 3on top c disk 3on bottom c clear a
+delete: disk 3on peg a disk 3on top a disk 3on bottom a clear c
+Name: move disk 0 from bottom b to bottom a
+pre: disk 0on peg b disk 0on top b disk 0on bottom b clear a
+add: disk 0on peg a disk 0on top a disk 0on bottom a clear b
+delete: disk 0on peg b disk 0on top b disk 0on bottom b clear a
+Name: move disk 1 from bottom b to bottom a
+pre: disk 1on peg b disk 1on top b disk 1on bottom b clear a
+add: disk 1on peg a disk 1on top a disk 1on bottom a clear b
+delete: disk 1on peg b disk 1on top b disk 1on bottom b clear a
+Name: move disk 2 from bottom b to bottom a
+pre: disk 2on peg b disk 2on top b disk 2on bottom b clear a
+add: disk 2on peg a disk 2on top a disk 2on bottom a clear b
+delete: disk 2on peg b disk 2on top b disk 2on bottom b clear a
+Name: move disk 3 from bottom b to bottom a
+pre: disk 3on peg b disk 3on top b disk 3on bottom b clear a
+add: disk 3on peg a disk 3on top a disk 3on bottom a clear b
+delete: disk 3on peg b disk 3on top b disk 3on bottom b clear a
+Name: move disk 0 from bottom b to bottom c
+pre: disk 0on peg b disk 0on top b disk 0on bottom b clear c
+add: disk 0on peg c disk 0on top c disk 0on bottom c clear b
+delete: disk 0on peg b disk 0on top b disk 0on bottom b clear c
+Name: move disk 1 from bottom b to bottom c
+pre: disk 1on peg b disk 1on top b disk 1on bottom b clear c
+add: disk 1on peg c disk 1on top c disk 1on bottom c clear b
+delete: disk 1on peg b disk 1on top b disk 1on bottom b clear c
+Name: move disk 2 from bottom b to bottom c
+pre: disk 2on peg b disk 2on top b disk 2on bottom b clear c
+add: disk 2on peg c disk 2on top c disk 2on bottom c clear b
+delete: disk 2on peg b disk 2on top b disk 2on bottom b clear c
+Name: move disk 3 from bottom b to bottom c
+pre: disk 3on peg b disk 3on top b disk 3on bottom b clear c
+add: disk 3on peg c disk 3on top c disk 3on bottom c clear b
+delete: disk 3on peg b disk 3on top b disk 3on bottom b clear c
+Name: move disk 0 from bottom c to bottom a
+pre: disk 0on peg c disk 0on top c disk 0on bottom c clear a
+add: disk 0on peg a disk 0on top a disk 0on bottom a clear c
+delete: disk 0on peg c disk 0on top c disk 0on bottom c clear a
+Name: move disk 1 from bottom c to bottom a
+pre: disk 1on peg c disk 1on top c disk 1on bottom c clear a
+add: disk 1on peg a disk 1on top a disk 1on bottom a clear c
+delete: disk 1on peg c disk 1on top c disk 1on bottom c clear a
+Name: move disk 2 from bottom c to bottom a
+pre: disk 2on peg c disk 2on top c disk 2on bottom c clear a
+add: disk 2on peg a disk 2on top a disk 2on bottom a clear c
+delete: disk 2on peg c disk 2on top c disk 2on bottom c clear a
+Name: move disk 3 from bottom c to bottom a
+pre: disk 3on peg c disk 3on top c disk 3on bottom c clear a
+add: disk 3on peg a disk 3on top a disk 3on bottom a clear c
+delete: disk 3on peg c disk 3on top c disk 3on bottom c clear a
+Name: move disk 0 from bottom c to bottom b
+pre: disk 0on peg c disk 0on top c disk 0on bottom c clear b
+add: disk 0on peg b disk 0on top b disk 0on bottom b clear c
+delete: disk 0on peg c disk 0on top c disk 0on bottom c clear b
+Name: move disk 1 from bottom c to bottom b
+pre: disk 1on peg c disk 1on top c disk 1on bottom c clear b
+add: disk 1on peg b disk 1on top b disk 1on bottom b clear c
+delete: disk 1on peg c disk 1on top c disk 1on bottom c clear b
+Name: move disk 2 from bottom c to bottom b
+pre: disk 2on peg c disk 2on top c disk 2on bottom c clear b
+add: disk 2on peg b disk 2on top b disk 2on bottom b clear c
+delete: disk 2on peg c disk 2on top c disk 2on bottom c clear b
+Name: move disk 3 from bottom c to bottom b
+pre: disk 3on peg c disk 3on top c disk 3on bottom c clear b
+add: disk 3on peg b disk 3on top b disk 3on bottom b clear c
+delete: disk 3on peg c disk 3on top c disk 3on bottom c clear b
+Name: move disk 0 from disk 1 from peg a to disk 1on peg b
+pre: disk 0on_disk 1 disk 0on_top a disk 0on_peg a disk 1on_peg a disk 1on_top b disk 1on peg b
+add: disk_0on_top_b disk_0on_peg_b disk_0on_disk_1 disk_1on_top_a
+delete: disk_0on_disk_1 disk_0on_top_a disk_0on_peg_a disk_1on_top_b
+Name: move disk 0 from disk 1 from peg a to disk 2on peg b
+pre: disk 0on_disk 1 disk 0on_top a disk 0on_peg a disk 1on_peg a disk 2on_top b disk 2on peg b
+add: disk_0on_top_b disk_0on_peg_b disk_0on_disk_2 disk_1on_top_a
+delete: disk_0on_disk_1 disk_0on_top_a disk_0on_peg_a disk_2on_top_b
+Name: move disk 0 from disk 1 from peg a to disk 3on peg b
+pre: disk 0on_disk 1 disk 0on_top a disk 0on_peg a disk 1on_peg a disk 3on_top b disk 3on peg b
+add: disk_0on_top_b disk_0on_peg_b disk_0on_disk_3 disk_1on_top_a
+delete: disk_0on_disk_1 disk_0on_top_a disk_0on_peg_a disk_3on_top_b
+Name: move disk 0 from disk 2 from peg a to disk 1on peg b
+pre: disk 0on_disk 2 disk 0on_top a disk 0on_peg a disk 2on_peg a disk 1on_top b disk 1on peg b
+add: disk_0on_top_b disk_0on_peg_b disk_0on_disk_1 disk_2on_top_a
+delete: disk_0on_disk_2 disk_0on_top_a disk_0on_peg_a disk_1on_top_b
+Name: move disk 0 from disk 2 from peg a to disk 2on peg b
+pre: disk 0on_disk 2 disk 0on_top a disk 0on_peg a disk 2on_peg a disk 2on_top b disk 2on peg b
+add: disk_0on_top_b disk_0on_peg_b disk_0on_disk_2 disk_2on_top_a
+delete: disk_0on_disk_2 disk_0on_top_a disk_0on_peg_a disk_2on_top_b
+Name: move disk 0 from disk 2 from peg a to disk 3on peg b
+pre: disk 0on_disk 2 disk 0on_top a disk 0on_peg a disk 2on_peg a disk 3on_top b disk 3on peg b
+add: disk_0on_top_b disk_0on_peg_b disk_0on_disk_3 disk_2on_top_a
+delete: disk_0on_disk_2 disk_0on_top_a disk_0on_peg_a disk_3on_top_b
+Name: move disk 0 from disk 3 from peg a to disk 1on peg b
+pre: disk 0on_disk 3 disk 0on_top a disk 0on_peg a disk 3on_peg a disk 1on_top b disk 1on peg b
+add: disk_0on_top_b disk_0on_peg_b disk_0on_disk_1 disk_3on_top_a
+delete: disk_0on_disk_3 disk_0on_top_a disk_0on_peg_a disk_1on_top_b
+Name: move disk 0 from disk 3 from peg a to disk 2on peg b
+pre: disk 0on_disk 3 disk 0on_top a disk 0on_peg a disk 3on_peg a disk 2on_top b disk 2on peg b
+add: disk_0on_top_b disk_0on_peg_b disk_0on_disk_2 disk_3on_top_a
+delete: disk_0on_disk_3 disk_0on_top_a disk_0on_peg_a disk_2on_top_b
+Name: move disk 0 from disk 3 from peg a to disk 3on peg b
+pre: disk 0on_disk 3 disk 0on_top a disk 0on_peg a disk 3on_peg a disk 3on_top b disk 3on peg b
+add: disk_0on_top_b disk_0on_peg_b disk_0on_disk_3 disk_3on_top_a
+delete: disk_0on_disk_3 disk_0on_top_a disk_0on_peg_a disk_3on_top_b
+Name: move disk 1 from disk 2 from peg a to disk 2on peg b
+pre: disk 1on_disk 2 disk 1on_top a disk 1on_peg a disk 2on_peg a disk 2on_top b disk 2on peg b
+add: disk_1on_top_b disk_1on_peg_b disk_1on_disk_2 disk_2on_top_a
+delete: disk_1on_disk_2 disk_1on_top_a disk_1on_peg_a disk_2on_top_b
+Name: move disk 1 from disk 2 from peg a to disk 3on peg b
+pre: disk 1on_disk 2 disk 1on_top a disk 1on_peg a disk 2on_peg a disk 3on_top b disk 3on peg b
+add: disk_1on_top_b disk_1on_peg_b disk_1on_disk_3 disk_2on_top_a
+delete: disk_1on_disk_2 disk_1on_top_a disk_1on_peg_a disk_3on_top_b
+Name: move disk 1 from disk 3 from peg a to disk 2on peg b
+pre: disk 1on_disk 3 disk 1on_top a disk 1on_peg a disk 3on_peg a disk 2on_top b disk 2on peg b
+add: disk_1on_top_b disk_1on_peg_b disk_1on_disk_2 disk_3on_top_a
+delete: disk_1on_disk_3 disk_1on_top_a disk_1on_peg_a disk_2on_top_b
+Name: move disk 1 from disk 3 from peg a to disk 3on peg b
+pre: disk 1on_disk 3 disk 1on_top a disk 1on_peg a disk 3on_peg a disk 3on_top b disk 3on peg b
+add: disk_1on_top_b disk_1on_peg_b disk_1on_disk_3 disk_3on_top_a
+delete: disk_1on_disk_3 disk_1on_top_a disk_1on_peg_a disk_3on_top_b
+Name: move disk 2 from disk 3 from peg a to disk 3on peg b
+pre: disk 2on_disk 3 disk 2on_top a disk 2on_peg a disk 3on_peg a disk 3on_top b disk 3on peg b
+add: disk_2on_top_b disk_2on_peg_b disk_2on_disk_3 disk_3on_top_a
+delete: disk_2on_disk_3 disk_2on_top_a disk_2on_peg_a disk_3on_top_b
+Name: move disk 0 from disk 1 from peg a to disk 1on peg c
+pre: disk 0on_disk 1 disk 0on_top a disk 0on_peg a disk 1on_peg a disk 1on_top c disk 1on peg c
+add: disk_0on_top_c disk_0on_peg_c disk_0on_disk_1 disk_1on_top_a
+delete: disk_0on_disk_1 disk_0on_top_a disk_0on_peg_a disk_1on_top_c
+Name: move disk 0 from disk 1 from peg a to disk 2on peg c
+pre: disk 0on_disk 1 disk 0on_top a disk 0on_peg a disk 1on_peg a disk 2on_top c disk 2on peg c
+add: disk_0on_top_c disk_0on_peg_c disk_0on_disk_2 disk_1on_top_a
+delete: disk_0on_disk_1 disk_0on_top_a disk_0on_peg_a disk_2on_top_c
+Name: move disk 0 from disk 1 from peg a to disk 3on peg c
+pre: disk 0on_disk 1 disk 0on_top a disk 0on_peg a disk 1on_peg a disk 3on_top c disk 3on peg c
+add: disk_0on_top_c disk_0on_peg_c disk_0on_disk_3 disk_1on_top_a
+delete: disk_0on_disk_1 disk_0on_top_a disk_0on_peg_a disk_3on_top_c
+Name: move disk 0 from disk 2 from peg a to disk 1on peg c
+pre: disk 0on_disk 2 disk 0on_top a disk 0on_peg a disk 2on_peg a disk 1on_top c disk 1on peg c
+add: disk_0on_top_c disk_0on_peg_c disk_0on_disk_1 disk_2on_top_a
+delete: disk_0on_disk_2 disk_0on_top_a disk_0on_peg_a disk_1on_top_c
+Name: move disk 0 from disk 2 from peg a to disk 2on peg c
+pre: disk 0on_disk 2 disk 0on_top a disk 0on_peg a disk 2on_peg a disk 2on_top c disk 2on peg c
+add: disk_0on_top_c disk_0on_peg_c disk_0on_disk_2 disk_2on_top_a
+delete: disk_0on_disk_2 disk_0on_top_a disk_0on_peg_a disk_2on_top_c
+Name: move disk 0 from disk 2 from peg a to disk 3on peg c
+pre: disk 0on_disk 2 disk 0on_top a disk 0on_peg a disk 2on_peg a disk 3on_top c disk 3on peg c
+add: disk_0on_top_c disk_0on_peg_c disk_0on_disk_3 disk_2on_top_a
+delete: disk_0on_disk_2 disk_0on_top_a disk_0on_peg_a disk_3on_top_c
+Name: move disk 0 from disk 3 from peg a to disk 1on peg c
+pre: disk 0on_disk 3 disk 0on_top a disk 0on_peg a disk 3on_peg a disk 1on_top c disk 1on peg c
+add: disk_0on_top_c disk_0on_peg_c disk_0on_disk_1 disk_3on_top_a
+delete: disk_0on_disk_3 disk_0on_top_a disk_0on_peg_a disk_1on_top_c
+Name: move disk 0 from disk 3 from peg a to disk 2on peg c
+pre: disk 0on_disk 3 disk 0on_top a disk 0on_peg a disk 3on_peg a disk 2on_top c disk 2on peg c
+add: disk_0on_top_c disk_0on_peg_c disk_0on_disk_2 disk_3on_top_a
+delete: disk_0on_disk_3 disk_0on_top_a disk_0on_peg_a disk_2on_top_c
+Name: move disk 0 from disk 3 from peg a to disk 3on peg c
+pre: disk 0on_disk 3 disk 0on_top a disk 0on_peg a disk 3on_peg a disk 3on_top c disk 3on peg c
+add: disk_0on_top_c disk_0on_peg_c disk_0on_disk_3 disk_3on_top_a
+delete: disk_0on_disk_3 disk_0on_top_a disk_0on_peg_a disk_3on_top_c
+Name: move disk 1 from disk 2 from peg a to disk 2on peg c
+pre: disk 1on_disk 2 disk 1on_top a disk 1on_peg a disk 2on_peg a disk 2on_top c disk 2on peg c
+add: disk_1on_top_c disk_1on_peg_c disk_1on_disk_2 disk_2on_top_a
+delete: disk_1on_disk_2 disk_1on_top_a disk_1on_peg_a disk_2on_top_c
+Name: move disk 1 from disk 2 from peg a to disk 3on peg c
+pre: disk 1on_disk 2 disk 1on_top a disk 1on_peg a disk 2on_peg a disk 3on_top c disk 3on peg c
+add: disk_1on_top_c disk_1on_peg_c disk_1on_disk_3 disk_2on_top_a
+delete: disk_1on_disk_2 disk_1on_top_a disk_1on_peg_a disk_3on_top_c
+Name: move disk 1 from disk 3 from peg a to disk 2on peg c
+pre: disk 1on_disk 3 disk 1on_top a disk 1on_peg a disk 3on_peg a disk 2on_top c disk 2on peg c
+add: disk_1on_top_c disk_1on_peg_c disk_1on_disk_2 disk_3on_top_a
+delete: disk_1on_disk_3 disk_1on_top_a disk_1on_peg_a disk_2on_top_c
+Name: move disk 1 from disk 3 from peg a to disk 3on peg c
+pre: disk 1on_disk 3 disk 1on_top a disk 1on_peg a disk 3on_peg a disk 3on_top c disk 3on peg c
+add: disk_1on_top_c disk_1on_peg_c disk_1on_disk_3 disk_3on_top_a
+delete: disk_1on_disk_3 disk_1on_top_a disk_1on_peg_a disk_3on_top_c
+Name: move disk 2 from disk 3 from peg a to disk 3on peg c
+pre: disk 2on_disk 3 disk 2on_top a disk 2on_peg a disk 3on_peg a disk 3on_top c disk 3on peg c
+add: disk_2on_top_c disk_2on_peg_c disk_2on_disk_3 disk_3on_top_a
+delete: disk_2on_disk_3 disk_2on_top_a disk_2on_peg_a disk_3on_top_c
+Name: move disk 0 from disk 1 from peg b to disk 1on peg a
+pre: disk 0on_disk 1 disk 0on_top b disk 0on_peg b disk 1on_peg b disk 1on_top a disk 1on peg a
+add: disk_0on_top_a disk_0on_peg_a disk_0on_disk_1 disk_1on_top_b
+delete: disk_0on_disk_1 disk_0on_top_b disk_0on_peg_b disk_1on_top_a
+Name: move disk 0 from disk 1 from peg b to disk 2on peg a
+pre: disk 0on_disk 1 disk 0on_top b disk 0on_peg b disk 1on_peg b disk 2on_top a disk 2on peg a
+add: disk_0on_top_a disk_0on_peg_a disk_0on_disk_2 disk_1on_top_b
+delete: disk_0on_disk_1 disk_0on_top_b disk_0on_peg_b disk_2on_top_a
+Name: move disk 0 from disk 1 from peg b to disk 3on peg a
+pre: disk 0on_disk 1 disk 0on_top b disk 0on_peg b disk 1on_peg b disk 3on_top a disk 3on peg a
+add: disk_0on_top_a disk_0on_peg_a disk_0on_disk_3 disk_1on_top_b
+delete: disk_0on_disk_1 disk_0on_top_b disk_0on_peg_b disk_3on_top_a
+Name: move disk 0 from disk 2 from peg b to disk 1on peg a
+pre: disk 0on_disk 2 disk 0on_top b disk 0on_peg b disk 2on_peg b disk 1on_top a disk 1on peg a
+add: disk_0on_top_a disk_0on_peg_a disk_0on_disk_1 disk_2on_top_b
+delete: disk_0on_disk_2 disk_0on_top_b disk_0on_peg_b disk_1on_top_a
+Name: move disk 0 from disk 2 from peg b to disk 2on peg a
+pre: disk 0on_disk 2 disk 0on_top b disk 0on_peg b disk 2on_peg b disk 2on_top a disk 2on peg a
+add: disk_0on_top_a disk_0on_peg_a disk_0on_disk_2 disk_2on_top_b
+delete: disk_0on_disk_2 disk_0on_top_b disk_0on_peg_b disk_2on_top_a
+Name: move disk 0 from disk 2 from peg b to disk 3on peg a
+pre: disk 0on_disk 2 disk 0on_top b disk 0on_peg b disk 2on_peg b disk 3on_top a disk 3on peg a
+add: disk_0on_top_a disk_0on_peg_a disk_0on_disk_3 disk_2on_top_b
+delete: disk_0on_disk_2 disk_0on_top_b disk_0on_peg_b disk_3on_top_a
+Name: move disk 0 from disk 3 from peg b to disk 1on peg a
+pre: disk 0on_disk 3 disk 0on_top b disk 0on_peg b disk 3on_peg b disk 1on_top a disk 1on peg a
+add: disk_0on_top_a disk_0on_peg_a disk_0on_disk_1 disk_3on_top_b
+delete: disk_0on_disk_3 disk_0on_top_b disk_0on_peg_b disk_1on_top_a
+Name: move disk 0 from disk 3 from peg b to disk 2on peg a
+pre: disk 0on_disk 3 disk 0on_top b disk 0on_peg b disk 3on_peg b disk 2on_top a disk 2on peg a
+add: disk_0on_top_a disk_0on_peg_a disk_0on_disk_2 disk_3on_top_b
+delete: disk_0on_disk_3 disk_0on_top_b disk_0on_peg_b disk_2on_top_a
+Name: move disk 0 from disk 3 from peg b to disk 3on peg a
+pre: disk 0on_disk 3 disk 0on_top b disk 0on_peg b disk 3on_peg b disk 3on_top a disk 3on peg a
+add: disk_0on_top_a disk_0on_peg_a disk_0on_disk_3 disk_3on_top_b
+delete: disk_0on_disk_3 disk_0on_top_b disk_0on_peg_b disk_3on_top_a
+Name: move disk 1 from disk 2 from peg b to disk 2on peg a
+pre: disk 1on_disk 2 disk 1on_top b disk 1on_peg b disk 2on_peg b disk 2on_top a disk 2on peg a
+add: disk_1on_top_a disk_1on_peg_a disk_1on_disk_2 disk_2on_top_b
+delete: disk_1on_disk_2 disk_1on_top_b disk_1on_peg_b disk_2on_top_a
+Name: move disk 1 from disk 2 from peg b to disk 3on peg a
+pre: disk 1on_disk 2 disk 1on_top b disk 1on_peg b disk 2on_peg b disk 3on_top a disk 3on peg a
+add: disk_1on_top_a disk_1on_peg_a disk_1on_disk_3 disk_2on_top_b
+delete: disk_1on_disk_2 disk_1on_top_b disk_1on_peg_b disk_3on_top_a
+Name: move disk 1 from disk 3 from peg b to disk 2on peg a
+pre: disk 1on_disk 3 disk 1on_top b disk 1on_peg b disk 3on_peg b disk 2on_top a disk 2on peg a
+add: disk_1on_top_a disk_1on_peg_a disk_1on_disk_2 disk_3on_top_b
+delete: disk_1on_disk_3 disk_1on_top_b disk_1on_peg_b disk_2on_top_a
+Name: move disk 1 from disk 3 from peg b to disk 3on peg a
+pre: disk 1on_disk 3 disk 1on_top b disk 1on_peg b disk 3on_peg b disk 3on_top a disk 3on peg a
+add: disk_1on_top_a disk_1on_peg_a disk_1on_disk_3 disk_3on_top_b
+delete: disk_1on_disk_3 disk_1on_top_b disk_1on_peg_b disk_3on_top_a
+Name: move disk 2 from disk 3 from peg b to disk 3on peg a
+pre: disk 2on_disk 3 disk 2on_top b disk 2on_peg b disk 3on_peg b disk 3on_top a disk 3on peg a
+add: disk_2on_top_a disk_2on_peg_a disk_2on_disk_3 disk_3on_top_b
+delete: disk_2on_disk_3 disk_2on_top_b disk_2on_peg_b disk_3on_top_a
+Name: move disk 0 from disk 1 from peg b to disk 1on peg c
+pre: disk 0on_disk 1 disk 0on_top b disk 0on_peg b disk 1on_peg b disk 1on_top c disk 1on peg c
+add: disk_0on_top_c disk_0on_peg_c disk_0on_disk_1 disk_1on_top_b
+delete: disk_0on_disk_1 disk_0on_top_b disk_0on_peg_b disk_1on_top_c
+Name: move disk 0 from disk 1 from peg b to disk 2on peg c
+pre: disk 0on_disk 1 disk 0on_top b disk 0on_peg b disk 1on_peg b disk 2on_top c disk 2on peg c
+add: disk_0on_top_c disk_0on_peg_c disk_0on_disk_2 disk_1on_top_b
+delete: disk_0on_disk_1 disk_0on_top_b disk_0on_peg_b disk_2on_top_c
+Name: move disk 0 from disk 1 from peg b to disk 3on peg c
+pre: disk 0on_disk 1 disk 0on_top b disk 0on_peg b disk 1on_peg b disk 3on_top c disk 3on peg c
+add: disk_0on_top_c disk_0on_peg_c disk_0on_disk_3 disk_1on_top_b
+delete: disk_0on_disk_1 disk_0on_top_b disk_0on_peg_b disk_3on_top_c
+Name: move disk 0 from disk 2 from peg b to disk 1on peg c
+pre: disk 0on_disk 2 disk 0on_top b disk 0on_peg b disk 2on_peg b disk 1on_top c disk 1on peg c
+add: disk_0on_top_c disk_0on_peg_c disk_0on_disk_1 disk_2on_top_b
+delete: disk_0on_disk_2 disk_0on_top_b disk_0on_peg_b disk_1on_top_c
+Name: move disk 0 from disk 2 from peg b to disk 2on peg c
+pre: disk 0on_disk 2 disk 0on_top b disk 0on_peg b disk 2on_peg b disk 2on_top c disk 2on peg c
+add: disk_0on_top_c disk_0on_peg_c disk_0on_disk_2 disk_2on_top_b
+delete: disk_0on_disk_2 disk_0on_top_b disk_0on_peg_b disk_2on_top_c
+Name: move disk 0 from disk 2 from peg b to disk 3on peg c
+pre: disk 0on_disk 2 disk 0on_top b disk 0on_peg b disk 2on_peg b disk 3on_top c disk 3on peg c
+add: disk_0on_top_c disk_0on_peg_c disk_0on_disk_3 disk_2on_top_b
+delete: disk_0on_disk_2 disk_0on_top_b disk_0on_peg_b disk_3on_top_c
+Name: move disk 0 from disk 3 from peg b to disk 1on peg c
+pre: disk 0on_disk 3 disk 0on_top b disk 0on_peg b disk 3on_peg b disk 1on_top c disk 1on peg c
+add: disk_0on_top_c disk_0on_peg_c disk_0on_disk_1 disk_3on_top_b
+delete: disk_0on_disk_3 disk_0on_top_b disk_0on_peg_b disk_1on_top_c
+Name: move disk 0 from disk 3 from peg b to disk 2on peg c
+pre: disk 0on_disk 3 disk 0on_top b disk 0on_peg b disk 3on_peg b disk 2on_top c disk 2on peg c
+add: disk_0on_top_c disk_0on_peg_c disk_0on_disk_2 disk_3on_top_b
+delete: disk_0on_disk_3 disk_0on_top_b disk_0on_peg_b disk_2on_top_c
+Name: move disk 0 from disk 3 from peg b to disk 3on peg c
+pre: disk 0on_disk 3 disk 0on_top b disk 0on_peg b disk 3on_peg b disk 3on_top c disk 3on peg c
+add: disk_0on_top_c disk_0on_peg_c disk_0on_disk_3 disk_3on_top_b
+delete: disk_0on_disk_3 disk_0on_top_b disk_0on_peg_b disk_3on_top_c
+Name: move disk 1 from disk 2 from peg b to disk 2on peg c
+pre: disk 1on_disk 2 disk 1on_top b disk 1on_peg b disk 2on_peg b disk 2on_top c disk 2on peg c
+add: disk_1on_top_c disk_1on_peg_c disk_1on_disk_2 disk_2on_top_b
+delete: disk_1on_disk_2 disk_1on_top_b disk_1on_peg_b disk_2on_top_c
+Name: move disk 1 from disk 2 from peg b to disk 3on peg c
+pre: disk 1on_disk 2 disk 1on_top b disk 1on_peg b disk 2on_peg b disk 3on_top c disk 3on peg c
+add: disk_1on_top_c disk_1on_peg_c disk_1on_disk_3 disk_2on_top_b
+delete: disk_1on_disk_2 disk_1on_top_b disk_1on_peg_b disk_3on_top_c
+Name: move disk 1 from disk 3 from peg b to disk 2on peg c
+pre: disk 1on_disk 3 disk 1on_top b disk 1on_peg b disk 3on_peg b disk 2on_top c disk 2on peg c
+add: disk_1on_top_c disk_1on_peg_c disk_1on_disk_2 disk_3on_top_b
+delete: disk_1on_disk_3 disk_1on_top_b disk_1on_peg_b disk_2on_top_c
+Name: move disk 1 from disk 3 from peg b to disk 3on peg c
+pre: disk 1on_disk 3 disk 1on_top b disk 1on_peg b disk 3on_peg b disk 3on_top c disk 3on peg c
+add: disk_1on_top_c disk_1on_peg_c disk_1on_disk_3 disk_3on_top_b
+delete: disk_1on_disk_3 disk_1on_top_b disk_1on_peg_b disk_3on_top_c
+Name: move disk 2 from disk 3 from peg b to disk 3on peg c
+pre: disk 2on_disk 3 disk 2on_top b disk 2on_peg b disk 3on_peg b disk 3on_top c disk 3on peg c
+add: disk_2on_top_c disk_2on_peg_c disk_2on_disk_3 disk_3on_top_b
+delete: disk_2on_disk_3 disk_2on_top_b disk_2on_peg_b disk_3on_top_c
+Name: move disk 0 from disk 1 from peg c to disk 1on peg a
+pre: disk 0on_disk 1 disk 0on_top c disk 0on_peg c disk 1on_peg c disk 1on_top a disk 1on peg a
+add: disk_0on_top_a disk_0on_peg_a disk_0on_disk_1 disk_1on_top_c
+delete: disk_0on_disk_1 disk_0on_top_c disk_0on_peg_c disk_1on_top_a
+Name: move disk 0 from disk 1 from peg c to disk 2on peg a
+pre: disk 0on_disk 1 disk 0on_top c disk 0on_peg c disk 1on_peg c disk 2on_top a disk 2on peg a
+add: disk_0on_top_a disk_0on_peg_a disk_0on_disk_2 disk_1on_top_c
+delete: disk_0on_disk_1 disk_0on_top_c disk_0on_peg_c disk_2on_top_a
+Name: move disk 0 from disk 1 from peg c to disk 3on peg a
+pre: disk 0on_disk 1 disk 0on_top c disk 0on_peg c disk 1on_peg c disk 3on_top a disk 3on peg a
+add: disk_0on_top_a disk_0on_peg_a disk_0on_disk_3 disk_1on_top_c
+delete: disk_0on_disk_1 disk_0on_top_c disk_0on_peg_c disk_3on_top_a
+Name: move disk 0 from disk 2 from peg c to disk 1on peg a
+pre: disk 0on_disk 2 disk 0on_top c disk 0on_peg c disk 2on_peg c disk 1on_top a disk 1on peg a
+add: disk_0on_top_a disk_0on_peg_a disk_0on_disk_1 disk_2on_top_c
+delete: disk_0on_disk_2 disk_0on_top_c disk_0on_peg_c disk_1on_top_a
+Name: move disk 0 from disk 2 from peg c to disk 2on peg a
+pre: disk 0on_disk 2 disk 0on_top c disk 0on_peg c disk 2on_peg c disk 2on_top a disk 2on peg a
+add: disk_0on_top_a disk_0on_peg_a disk_0on_disk_2 disk_2on_top_c
+delete: disk_0on_disk_2 disk_0on_top_c disk_0on_peg_c disk_2on_top_a
+Name: move disk 0 from disk 2 from peg c to disk 3on peg a
+pre: disk 0on_disk 2 disk 0on_top c disk 0on_peg c disk 2on_peg c disk 3on_top a disk 3on peg a
+add: disk_0on_top_a disk_0on_peg_a disk_0on_disk_3 disk_2on_top_c
+delete: disk_0on_disk_2 disk_0on_top_c disk_0on_peg_c disk_3on_top_a
+Name: move disk 0 from disk 3 from peg c to disk 1on peg a
+pre: disk 0on_disk 3 disk 0on_top c disk 0on_peg c disk 3on_peg c disk 1on_top a disk 1on peg a
+add: disk_0on_top_a disk_0on_peg_a disk_0on_disk_1 disk_3on_top_c
+delete: disk_0on_disk_3 disk_0on_top_c disk_0on_peg_c disk_1on_top_a
+Name: move disk 0 from disk 3 from peg c to disk 2on peg a
+pre: disk 0on_disk 3 disk 0on_top c disk 0on_peg c disk 3on_peg c disk 2on_top a disk 2on peg a
+add: disk_0on_top_a disk_0on_peg_a disk_0on_disk_2 disk_3on_top_c
+delete: disk_0on_disk_3 disk_0on_top_c disk_0on_peg_c disk_2on_top_a
+Name: move disk 0 from disk 3 from peg c to disk 3on peg a
+pre: disk 0on_disk 3 disk 0on_top c disk 0on_peg c disk 3on_peg c disk 3on_top a disk 3on peg a
+add: disk_0on_top_a disk_0on_peg_a disk_0on_disk_3 disk_3on_top_c
+delete: disk_0on_disk_3 disk_0on_top_c disk_0on_peg_c disk_3on_top_a
+Name: move disk 1 from disk 2 from peg c to disk 2on peg a
+pre: disk 1on_disk 2 disk 1on_top c disk 1on_peg c disk 2on_peg c disk 2on_top a disk 2on peg a
+add: disk_1on_top_a disk_1on_peg_a disk_1on_disk_2 disk_2on_top_c
+delete: disk_1on_disk_2 disk_1on_top_c disk_1on_peg_c disk_2on_top_a
+Name: move disk 1 from disk 2 from peg c to disk 3on peg a
+pre: disk 1on_disk 2 disk 1on_top c disk 1on_peg c disk 2on_peg c disk 3on_top a disk 3on peg a
+add: disk_1on_top_a disk_1on_peg_a disk_1on_disk_3 disk_2on_top_c
+delete: disk_1on_disk_2 disk_1on_top_c disk_1on_peg_c disk_3on_top_a
+Name: move disk 1 from disk 3 from peg c to disk 2on peg a
+pre: disk 1on_disk 3 disk 1on_top c disk 1on_peg c disk 3on_peg c disk 2on_top a disk 2on peg a
+add: disk_1on_top_a disk_1on_peg_a disk_1on_disk_2 disk_3on_top_c
+delete: disk_1on_disk_3 disk_1on_top_c disk_1on_peg_c disk_2on_top_a
+Name: move disk 1 from disk 3 from peg c to disk 3on peg a
+pre: disk 1on_disk 3 disk 1on_top c disk 1on_peg c disk 3on_peg c disk 3on_top a disk 3on peg a
+add: disk_1on_top_a disk_1on_peg_a disk_1on_disk_3 disk_3on_top_c
+delete: disk_1on_disk_3 disk_1on_top_c disk_1on_peg_c disk_3on_top_a
+Name: move disk 2 from disk 3 from peg c to disk 3on peg a
+pre: disk 2on_disk 3 disk 2on_top c disk 2on_peg c disk 3on_peg c disk 3on_top a disk 3on peg a
+add: disk_2on_top_a disk_2on_peg_a disk_2on_disk_3 disk_3on_top_c
+delete: disk_2on_disk_3 disk_2on_top_c disk_2on_peg_c disk_3on_top_a
+Name: move disk 0 from disk 1 from peg c to disk 1on peg b
+pre: disk 0on_disk 1 disk 0on_top c disk 0on_peg c disk 1on_peg c disk 1on_top b disk 1on peg b
+add: disk_0on_top_b disk_0on_peg_b disk_0on_disk_1 disk_1on_top_c
+delete: disk_0on_disk_1 disk_0on_top_c disk_0on_peg_c disk_1on_top_b
+Name: move disk 0 from disk 1 from peg c to disk 2on peg b
+pre: disk 0on_disk 1 disk 0on_top c disk 0on_peg c disk 1on_peg c disk 2on_top b disk 2on peg b
+add: disk_0on_top_b disk_0on_peg_b disk_0on_disk_2 disk_1on_top_c
+delete: disk_0on_disk_1 disk_0on_top_c disk_0on_peg_c disk_2on_top_b
+Name: move disk 0 from disk 1 from peg c to disk 3on peg b
+pre: disk 0on_disk 1 disk 0on_top c disk 0on_peg c disk 1on_peg c disk 3on_top b disk 3on peg b
+add: disk_0on_top_b disk_0on_peg_b disk_0on_disk_3 disk_1on_top_c
+delete: disk_0on_disk_1 disk_0on_top_c disk_0on_peg_c disk_3on_top_b
+Name: move disk 0 from disk 2 from peg c to disk 1on peg b
+pre: disk 0on_disk 2 disk 0on_top c disk 0on_peg c disk 2on_peg c disk 1on_top b disk 1on peg b
+add: disk_0on_top_b disk_0on_peg_b disk_0on_disk_1 disk_2on_top_c
+delete: disk_0on_disk_2 disk_0on_top_c disk_0on_peg_c disk_1on_top_b
+Name: move disk 0 from disk 2 from peg c to disk 2on peg b
+pre: disk 0on_disk 2 disk 0on_top c disk 0on_peg c disk 2on_peg c disk 2on_top b disk 2on peg b
+add: disk_0on_top_b disk_0on_peg_b disk_0on_disk_2 disk_2on_top_c
+delete: disk_0on_disk_2 disk_0on_top_c disk_0on_peg_c disk_2on_top_b
+Name: move disk 0 from disk 2 from peg c to disk 3on peg b
+pre: disk 0on_disk 2 disk 0on_top c disk 0on_peg c disk 2on_peg c disk 3on_top b disk 3on peg b
+add: disk_0on_top_b disk_0on_peg_b disk_0on_disk_3 disk_2on_top_c
+delete: disk_0on_disk_2 disk_0on_top_c disk_0on_peg_c disk_3on_top_b
+Name: move disk 0 from disk 3 from peg c to disk 1on peg b
+pre: disk 0on_disk 3 disk 0on_top c disk 0on_peg c disk 3on_peg c disk 1on_top b disk 1on peg b
+add: disk_0on_top_b disk_0on_peg_b disk_0on_disk_1 disk_3on_top_c
+delete: disk_0on_disk_3 disk_0on_top_c disk_0on_peg_c disk_1on_top_b
+Name: move disk 0 from disk 3 from peg c to disk 2on peg b
+pre: disk 0on_disk 3 disk 0on_top c disk 0on_peg c disk 3on_peg c disk 2on_top b disk 2on peg b
+add: disk_0on_top_b disk_0on_peg_b disk_0on_disk_2 disk_3on_top_c
+delete: disk_0on_disk_3 disk_0on_top_c disk_0on_peg_c disk_2on_top_b
+Name: move disk 0 from disk 3 from peg c to disk 3on peg b
+pre: disk 0on_disk 3 disk 0on_top c disk 0on_peg c disk 3on_peg c disk 3on_top b disk 3on peg b
+add: disk_0on_top_b disk_0on_peg_b disk_0on_disk_3 disk_3on_top_c
+delete: disk_0on_disk_3 disk_0on_top_c disk_0on_peg_c disk_3on_top_b
+Name: move disk 1 from disk 2 from peg c to disk 2on peg b
+pre: disk 1on_disk 2 disk 1on_top c disk 1on_peg c disk 2on_peg c disk 2on_top b disk 2on peg b
+add: disk_1on_top_b disk_1on_peg_b disk_1on_disk_2 disk_2on_top_c
+delete: disk_1on_disk_2 disk_1on_top_c disk_1on_peg_c disk_2on_top_b
+Name: move disk 1 from disk 2 from peg c to disk 3on peg b
+pre: disk 1on_disk 2 disk 1on_top c disk 1on_peg c disk 2on_peg c disk 3on_top b disk 3on peg b
+add: disk_1on_top_b disk_1on_peg_b disk_1on_disk_3 disk_2on_top_c
+delete: disk_1on_disk_2 disk_1on_top_c disk_1on_peg_c disk_3on_top_b
+Name: move disk 1 from disk 3 from peg c to disk 2on peg b
+pre: disk 1on_disk 3 disk 1on_top c disk 1on_peg c disk 3on_peg c disk 2on_top b disk 2on peg b
+add: disk_1on_top_b disk_1on_peg_b disk_1on_disk_2 disk_3on_top_c
+delete: disk_1on_disk_3 disk_1on_top_c disk_1on_peg_c disk_2on_top_b
+Name: move disk 1 from disk 3 from peg c to disk 3on peg b
+pre: disk 1on_disk 3 disk 1on_top c disk 1on_peg c disk 3on_peg c disk 3on_top b disk 3on peg b
+add: disk_1on_top_b disk_1on_peg_b disk_1on_disk_3 disk_3on_top_c
+delete: disk_1on_disk_3 disk_1on_top_c disk_1on_peg_c disk_3on_top_b
+Name: move disk 2 from disk 3 from peg c to disk 3on peg b
+pre: disk 2on_disk 3 disk 2on_top c disk 2on_peg c disk 3on_peg c disk 3on_top b disk 3on peg b
+add: disk_2on_top_b disk_2on_peg_b disk_2on_disk_3 disk_3on_top_c
+delete: disk_2on_disk_3 disk_2on_top_c disk_2on_peg_c disk_3on_top_b
