@@ -118,13 +118,14 @@ class PlanGraphLevel(object):
     "*** YOUR CODE HERE ***"
             
   def expandWithoutMutex(self, previousLayer):
-    """
-    Questions 11 and 12
-    You don't have to use this function
-    """
-    previousLayerProposition = previousLayer.getPropositionLayer()
-    "*** YOUR CODE HERE ***"
-		
+      """
+      Questions 11 and 12
+      You don't have to use this function
+      """
+      previousLayerProposition = previousLayer.getPropositionLayer()
+      "*** YOUR CODE HERE ***"
+
+
 def mutexActions(a1, a2, mutexProps):
   """
   This function returns true if a1 and a2 are mutex actions.
@@ -137,20 +138,25 @@ def mutexActions(a1, a2, mutexProps):
   return haveCompetingNeeds(a1, a2, mutexProps)
 
 def haveCompetingNeeds(a1, a2, mutexProps):
-  """
-  Complete code for deciding whether actions a1 and a2 have competing needs,
-  given the mutex proposition from previous level (list of pairs of propositions).
-  Hint: for propositions p  and q, the command  "Pair(p, q) in mutexProps"
-        returns true if p and q are mutex in the previous level
-  """
-  "*** YOUR CODE HERE ***" 
+    """
+    Complete code for deciding whether actions a1 and a2 have competing needs,
+    given the mutex proposition from previous level (list of pairs of propositions).
+    Hint: for propositions p  and q, the command  "Pair(p, q) in mutexProps"
+          returns true if p and q are mutex in the previous level
+    """
+    # Checks for competing needs
+    for a1_precondition in a1.getPre():
+        for a2_precondition in a2.getPre():
+            if Pair(a1_precondition, a2_precondition) in mutexProps:
+                return True
+    return False
 		
 def mutexPropositions(prop1, prop2, mutexActions):
-  """
-  complete code for deciding whether two propositions are mutex,
-  given the mutex action from the current level (list of pairs of actions).
-  Your updateMutexProposition function should call this function
-  You might want to use this function:
-  prop1.getProducers() returns the list of all the possible actions in the layer that have prop1 on their add list
-  """
-  "*** YOUR CODE HERE ***"
+    """
+    complete code for deciding whether two propositions are mutex,
+    given the mutex action from the current level (list of pairs of actions).
+    Your updateMutexProposition function should call this function
+    You might want to use this function:
+    prop1.getProducers() returns the list of all the possible actions in the layer that have prop1 on their add list
+    """
+    "*** YOUR CODE HERE ***"
