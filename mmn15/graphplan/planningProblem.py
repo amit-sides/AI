@@ -27,16 +27,20 @@ class PlanningProblem():
     PlanGraphLevel.setActions(self.actions)
     PlanGraphLevel.setProps(self.propositions)
     self._expanded = 0
+    self.visited = []
    
     
   def getStartState(self):
-    "*** YOUR CODE HERE ***"
+    return self.initialState
     
   def isGoalState(self, state):
     """
     Hint: you might want to take a look at goalStateNotInPropLayer function
     """
-    "*** YOUR CODE HERE ***"
+    for goal in self.goal:
+      if goal not in state:
+        return False
+    return True
     
   def getSuccessors(self, state):
     """   
@@ -50,7 +54,35 @@ class PlanningProblem():
     a.allPrecondsInList(l) returns true if the preconditions of a are in l
     """
     self._expanded += 1
-    "*** YOUR CODE HERE ***"
+    successors = []
+    for action in self.actions:
+
+      # Skip nop operations
+      if action.isNoOp():
+        continue
+
+      # Check if the action can be executed
+      if action.allPrecondsInList(state):
+
+        # Generate the successor's state
+        successor = state[::]
+        for prop in action.getAdd():
+          successor.append(prop)
+        for prop in action.getDelete():
+          successor.remove(prop)
+
+        # Check if we already calculated this state
+        if successor in self.visited:
+          continue
+
+        # Add the state to the visited list
+        successor = sorted(successor)
+        self.visited.append(successor)
+
+        # Add the successor to the output list
+        successors.append((successor, action, 1))
+
+    return successors
 
   def getCostOfActions(self, actions):
     return len(actions)
