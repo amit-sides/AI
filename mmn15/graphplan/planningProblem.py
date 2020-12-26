@@ -122,7 +122,22 @@ def maxLevel(state, problem):
   pgInit = PlanGraphLevel()                   #create a new plan graph level (level is the action layer and the propositions layer)
   pgInit.setPropositionLayer(propLayerInit)   #update the new plan graph level with the the proposition layer
   """
-  "*** YOUR CODE HERE ***"
+  propLayerInit = PropositionLayer()          # create a new proposition layer
+  for prop in state:
+    propLayerInit.addProposition(prop)        # update the proposition layer with the propositions of the state
+  pgInit = PlanGraphLevel()                   # create a new plan graph level (level is the action layer and the propositions layer)
+  pgInit.setPropositionLayer(propLayerInit)   # update the new plan graph level with the the proposition layer
+
+  graph = [pgInit]
+  level = 0
+  while not problem.isGoalState(graph[level].propositionLayer.getPropositions()):
+    level += 1
+    graph.append(PlanGraphLevel())
+    graph[level].expandWithoutMutex(graph[level-1])
+    if isFixed(graph, level):
+      return float("Inf")
+
+  return level
   
 def levelSum(state, problem):
   """
