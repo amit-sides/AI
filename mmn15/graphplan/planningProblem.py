@@ -138,14 +138,44 @@ def maxLevel(state, problem):
       return float("Inf")
 
   return level
-  
+
 def levelSum(state, problem):
   """
   The heuristic value is the sum of sub-goals level they first appeared.
   If the goal is not reachable from the state your heuristic should return float('inf')
   """
-  "*** YOUR CODE HERE ***"
-  
+  propLayerInit = PropositionLayer()          # create a new proposition layer
+  for prop in state:
+    propLayerInit.addProposition(prop)        # update the proposition layer with the propositions of the state
+  pgInit = PlanGraphLevel()                   # create a new plan graph level (level is the action layer and the propositions layer)
+  pgInit.setPropositionLayer(propLayerInit)   # update the new plan graph level with the the proposition layer
+
+  def isPropInGoal(prop):
+    for p in problem.goal:
+      if p.name == prop.name:
+        return True
+    return False
+
+  goals_levels = {prop.name:0 for prop in pgInit.getPropositionLayer().getPropositions() if isPropInGoal(prop)}
+
+  graph = [pgInit]
+  level = 0
+  while not problem.isGoalState(graph[level].propositionLayer.getPropositions()):
+    level += 1
+    graph.append(PlanGraphLevel())
+    graph[level].expandWithoutMutex(graph[level-1])
+    if isFixed(graph, level):
+      return float("Inf")
+
+    for prop in graph[level].propositionLayer.getPropositions():
+      if prop.name not in goals_levels and isPropInGoal(prop):
+        goals_levels[prop.name] = level
+
+  sum = 0
+  for prop in goals_levels:
+    sum += goals_levels[prop]
+  return sum
+
 def isFixed(Graph, level):
   """
   Checks if we have reached a fixed point,
