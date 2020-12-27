@@ -32,7 +32,7 @@ def createDomainFile(domainFileName, n):
         pre = "pre: {}{} {}".format(src_peg, number, " ".join(preconditions))
         add = "add: {}{}".format(dest_peg, number)
         delete = "delete: {}{}".format(src_peg, number)
-        domainFile.write(name+"\n")
+        domainFile.write(name + "\n")
         domainFile.write(pre + "\n")
         domainFile.write(add + "\n")
         domainFile.write(delete + "\n")
